@@ -43,9 +43,7 @@ class StyleSuggestionsClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_suggestions.create_style_suggestion(
             document_id="document_id",
         )
@@ -75,9 +73,7 @@ class StyleSuggestionsClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_suggestions.get_style_suggestion(
             workflow_id="workflow_id",
             document_id="document_id",
@@ -126,9 +122,7 @@ class AsyncStyleSuggestionsClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:
@@ -168,9 +162,7 @@ class AsyncStyleSuggestionsClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:

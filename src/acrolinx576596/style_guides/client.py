@@ -40,9 +40,7 @@ class StyleGuidesClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_guides.get_style_guides()
         """
         _response = self._raw_client.get_style_guides(request_options=request_options)
@@ -66,9 +64,7 @@ class StyleGuidesClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_guides.create_style_guide()
         """
         _response = self._raw_client.create_style_guide(request_options=request_options)
@@ -94,9 +90,7 @@ class StyleGuidesClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_guides.get_style_guide(
             style_guide_id="style_guide_id",
         )
@@ -124,9 +118,7 @@ class StyleGuidesClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_guides.update_style_guide(
             style_guide_id="style_guide_id",
         )
@@ -154,9 +146,7 @@ class StyleGuidesClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_guides.delete_style_guide(
             style_guide_id="style_guide_id",
         )
@@ -200,9 +190,7 @@ class AsyncStyleGuidesClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:
@@ -234,9 +222,7 @@ class AsyncStyleGuidesClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:
@@ -270,9 +256,7 @@ class AsyncStyleGuidesClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:
@@ -308,9 +292,7 @@ class AsyncStyleGuidesClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:
@@ -346,9 +328,7 @@ class AsyncStyleGuidesClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:

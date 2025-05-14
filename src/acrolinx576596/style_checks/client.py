@@ -43,9 +43,7 @@ class StyleChecksClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_checks.create_style_check(
             document_id="document_id",
         )
@@ -75,9 +73,7 @@ class StyleChecksClient:
         --------
         from acrolinx576596 import acrolinx
 
-        client = acrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = acrolinx()
         client.style_checks.get_style_check(
             workflow_id="workflow_id",
             document_id="document_id",
@@ -126,9 +122,7 @@ class AsyncStyleChecksClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:
@@ -166,9 +160,7 @@ class AsyncStyleChecksClient:
 
         from acrolinx576596 import Asyncacrolinx
 
-        client = Asyncacrolinx(
-            base_url="https://yourhost.com/path/to/api",
-        )
+        client = Asyncacrolinx()
 
 
         async def main() -> None:

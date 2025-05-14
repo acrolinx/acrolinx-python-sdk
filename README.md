@@ -1,14 +1,14 @@
 # Acrolinx576596 Python Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Ffern-demo%2Facrolinx-python-sdk)
-[![pypi](https://img.shields.io/pypi/v/acrolinx)](https://pypi.python.org/pypi/acrolinx)
+[![pypi](https://img.shields.io/pypi/v/acrolinx576596)](https://pypi.python.org/pypi/acrolinx576596)
 
 The Acrolinx576596 Python library provides convenient access to the Acrolinx576596 API from Python.
 
 ## Installation
 
 ```sh
-pip install acrolinx
+pip install acrolinx576596
 ```
 
 ## Reference
@@ -22,9 +22,7 @@ Instantiate and use the client with the following:
 ```python
 from acrolinx576596 import acrolinx
 
-client = acrolinx(
-    base_url="https://yourhost.com/path/to/api",
-)
+client = acrolinx()
 client.style_guides.create_style_guide()
 ```
 
@@ -37,9 +35,7 @@ import asyncio
 
 from acrolinx576596 import Asyncacrolinx
 
-client = Asyncacrolinx(
-    base_url="https://yourhost.com/path/to/api",
-)
+client = Asyncacrolinx()
 
 
 async def main() -> None:

@@ -13,10 +13,9 @@ class BaseClientWrapper:
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
-            "User-Agent": "acrolinx/0.0.1",
             "X-Fern-Language": "Python",
-            "X-Fern-SDK-Name": "acrolinx",
-            "X-Fern-SDK-Version": "0.0.1",
+            "X-Fern-SDK-Name": "acrolinx576596",
+            "X-Fern-SDK-Version": "0.0.0",
         }
         return headers
 

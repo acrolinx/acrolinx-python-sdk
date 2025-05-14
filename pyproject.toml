@@ -1,9 +1,9 @@
 [project]
-name = "acrolinx"
+name = "acrolinx576596"
 
 [tool.poetry]
-name = "acrolinx"
-version = "0.0.1"
+name = "acrolinx576596"
+version = "0.0.0"
 description = ""
 readme = "README.md"
 authors = []
