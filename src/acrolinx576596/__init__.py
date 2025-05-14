@@ -15,16 +15,15 @@ from .types import (
 )
 from .errors import UnprocessableEntityError
 from . import style_checks, style_guides, style_rewrites, style_suggestions
-from .client import AsyncStarter, Starter
+from .client import Asyncacrolinx, acrolinx
 from .version import __version__
 
 __all__ = [
-    "AsyncStarter",
+    "Asyncacrolinx",
     "HttpValidationError",
     "Issue",
     "RewriteResponse",
     "Scores",
-    "Starter",
     "StyleCheckResponse",
     "Suggestion",
     "SuggestionResponse",
@@ -32,6 +31,7 @@ __all__ = [
     "ValidationError",
     "ValidationErrorLocItem",
     "__version__",
+    "acrolinx",
     "style_checks",
     "style_guides",
     "style_rewrites",

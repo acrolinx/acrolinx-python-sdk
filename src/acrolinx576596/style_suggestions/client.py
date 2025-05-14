@@ -41,9 +41,14 @@ class StyleSuggestionsClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_suggestions.create_style_suggestion(document_id='document_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_suggestions.create_style_suggestion(
+            document_id="document_id",
+        )
         """
         _response = self._raw_client.create_style_suggestion(document_id=document_id, request_options=request_options)
         return _response.data
@@ -68,9 +73,15 @@ class StyleSuggestionsClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_suggestions.get_style_suggestion(workflow_id='workflow_id', document_id='document_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_suggestions.get_style_suggestion(
+            workflow_id="workflow_id",
+            document_id="document_id",
+        )
         """
         _response = self._raw_client.get_style_suggestion(
             workflow_id, document_id=document_id, request_options=request_options
@@ -111,11 +122,21 @@ class AsyncStyleSuggestionsClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_suggestions.create_style_suggestion(document_id='document_id', )
+            await client.style_suggestions.create_style_suggestion(
+                document_id="document_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.create_style_suggestion(
@@ -143,11 +164,22 @@ class AsyncStyleSuggestionsClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_suggestions.get_style_suggestion(workflow_id='workflow_id', document_id='document_id', )
+            await client.style_suggestions.get_style_suggestion(
+                workflow_id="workflow_id",
+                document_id="document_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.get_style_suggestion(

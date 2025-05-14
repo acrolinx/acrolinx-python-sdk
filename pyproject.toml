@@ -1,8 +1,8 @@
 [project]
-name = "startersdk"
+name = "acrolinx"
 
 [tool.poetry]
-name = "startersdk"
+name = "acrolinx"
 version = "0.0.1"
 description = ""
 readme = "README.md"
@@ -31,7 +31,7 @@ packages = [
 ]
 
 [project.urls]
-Repository = 'https://github.com/cdonel707/acrolinx-python-sdk'
+Repository = 'https://github.com/fern-demo/acrolinx-python-sdk'
 
 [tool.poetry.dependencies]
 python = "^3.8"

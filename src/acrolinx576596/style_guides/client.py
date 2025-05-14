@@ -38,8 +38,11 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.get_style_guides()
         """
         _response = self._raw_client.get_style_guides(request_options=request_options)
@@ -61,8 +64,11 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.create_style_guide()
         """
         _response = self._raw_client.create_style_guide(request_options=request_options)
@@ -86,9 +92,14 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_guides.get_style_guide(style_guide_id='style_guide_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_guides.get_style_guide(
+            style_guide_id="style_guide_id",
+        )
         """
         _response = self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
         return _response.data
@@ -111,9 +122,14 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_guides.update_style_guide(style_guide_id='style_guide_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_guides.update_style_guide(
+            style_guide_id="style_guide_id",
+        )
         """
         _response = self._raw_client.update_style_guide(style_guide_id, request_options=request_options)
         return _response.data
@@ -136,9 +152,14 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_guides.delete_style_guide(style_guide_id='style_guide_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_guides.delete_style_guide(
+            style_guide_id="style_guide_id",
+        )
         """
         _response = self._raw_client.delete_style_guide(style_guide_id, request_options=request_options)
         return _response.data
@@ -175,11 +196,19 @@ class AsyncStyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
             await client.style_guides.get_style_guides()
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.get_style_guides(request_options=request_options)
@@ -201,11 +230,19 @@ class AsyncStyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
             await client.style_guides.create_style_guide()
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.create_style_guide(request_options=request_options)
@@ -229,11 +266,21 @@ class AsyncStyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_guides.get_style_guide(style_guide_id='style_guide_id', )
+            await client.style_guides.get_style_guide(
+                style_guide_id="style_guide_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
@@ -257,11 +304,21 @@ class AsyncStyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_guides.update_style_guide(style_guide_id='style_guide_id', )
+            await client.style_guides.update_style_guide(
+                style_guide_id="style_guide_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.update_style_guide(style_guide_id, request_options=request_options)
@@ -285,11 +342,21 @@ class AsyncStyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_guides.delete_style_guide(style_guide_id='style_guide_id', )
+            await client.style_guides.delete_style_guide(
+                style_guide_id="style_guide_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_style_guide(style_guide_id, request_options=request_options)

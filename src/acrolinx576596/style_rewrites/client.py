@@ -41,9 +41,14 @@ class StyleRewritesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_rewrites.create_style_rewrite(document_id='document_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_rewrites.create_style_rewrite(
+            document_id="document_id",
+        )
         """
         _response = self._raw_client.create_style_rewrite(document_id=document_id, request_options=request_options)
         return _response.data
@@ -68,9 +73,15 @@ class StyleRewritesClient:
 
         Examples
         --------
-        from acrolinx576596 import Starter
-        client = Starter(base_url="https://yourhost.com/path/to/api", )
-        client.style_rewrites.get_style_rewrite(workflow_id='workflow_id', document_id='document_id', )
+        from acrolinx576596 import acrolinx
+
+        client = acrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_rewrites.get_style_rewrite(
+            workflow_id="workflow_id",
+            document_id="document_id",
+        )
         """
         _response = self._raw_client.get_style_rewrite(
             workflow_id, document_id=document_id, request_options=request_options
@@ -111,11 +122,21 @@ class AsyncStyleRewritesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_rewrites.create_style_rewrite(document_id='document_id', )
+            await client.style_rewrites.create_style_rewrite(
+                document_id="document_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.create_style_rewrite(
@@ -143,11 +164,22 @@ class AsyncStyleRewritesClient:
 
         Examples
         --------
-        from acrolinx576596 import AsyncStarter
         import asyncio
-        client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+
+        from acrolinx576596 import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
         async def main() -> None:
-            await client.style_rewrites.get_style_rewrite(workflow_id='workflow_id', document_id='document_id', )
+            await client.style_rewrites.get_style_rewrite(
+                workflow_id="workflow_id",
+                document_id="document_id",
+            )
+
+
         asyncio.run(main())
         """
         _response = await self._raw_client.get_style_rewrite(

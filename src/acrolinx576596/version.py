@@ -1,3 +1,3 @@
 from importlib import metadata
 
-__version__ = metadata.version("startersdk")
+__version__ = metadata.version("acrolinx")

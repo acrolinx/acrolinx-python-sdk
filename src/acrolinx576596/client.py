@@ -10,7 +10,7 @@ from .style_rewrites.client import AsyncStyleRewritesClient, StyleRewritesClient
 from .style_suggestions.client import AsyncStyleSuggestionsClient, StyleSuggestionsClient
 
 
-class Starter:
+class acrolinx:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -30,8 +30,11 @@ class Starter:
 
     Examples
     --------
-    from acrolinx576596 import Starter
-    client = Starter(base_url="https://yourhost.com/path/to/api", )
+    from acrolinx576596 import acrolinx
+
+    client = acrolinx(
+        base_url="https://yourhost.com/path/to/api",
+    )
     """
 
     def __init__(
@@ -60,7 +63,7 @@ class Starter:
         self.style_rewrites = StyleRewritesClient(client_wrapper=self._client_wrapper)
 
 
-class AsyncStarter:
+class Asyncacrolinx:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -80,8 +83,11 @@ class AsyncStarter:
 
     Examples
     --------
-    from acrolinx576596 import AsyncStarter
-    client = AsyncStarter(base_url="https://yourhost.com/path/to/api", )
+    from acrolinx576596 import Asyncacrolinx
+
+    client = Asyncacrolinx(
+        base_url="https://yourhost.com/path/to/api",
+    )
     """
 
     def __init__(
