@@ -41,9 +41,12 @@ class StyleRewritesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_rewrites.create_style_rewrite(
             document_id="document_id",
         )
@@ -71,9 +74,12 @@ class StyleRewritesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_rewrites.get_style_rewrite(
             workflow_id="workflow_id",
             document_id="document_id",
@@ -120,9 +126,12 @@ class AsyncStyleRewritesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
@@ -160,9 +169,12 @@ class AsyncStyleRewritesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:

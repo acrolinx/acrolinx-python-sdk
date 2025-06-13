@@ -1,8 +1,8 @@
 [project]
-name = "acrolinx576596"
+name = "acrolinx"
 
 [tool.poetry]
-name = "acrolinx576596"
+name = "acrolinx"
 version = "0.0.0"
 description = ""
 readme = "README.md"
@@ -27,11 +27,11 @@ classifiers = [
     "Typing :: Typed"
 ]
 packages = [
-    { include = "acrolinx576596", from = "src"}
+    { include = "acrolinx", from = "src"}
 ]
 
 [project.urls]
-Repository = 'https://github.com/fern-demo/acrolinx-python-sdk'
+Repository = 'https://github.com/acrolinx/acrolinx-python-sdk'
 
 [tool.poetry.dependencies]
 python = "^3.8"

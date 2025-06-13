@@ -11,7 +11,7 @@ from .color import Color
 from .shape import ShapeParams
 from .undiscriminated_shape import UndiscriminatedShapeParams
 
-from acrolinx576596.core.serialization import FieldMetadata
+from acrolinx.core.serialization import FieldMetadata
 
 
 class ObjectWithOptionalFieldParams(typing_extensions.TypedDict):

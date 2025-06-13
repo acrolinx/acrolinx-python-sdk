@@ -4,7 +4,7 @@
 
 import typing_extensions
 
-from acrolinx576596.core.serialization import FieldMetadata
+from acrolinx.core.serialization import FieldMetadata
 
 
 class CircleParams(typing_extensions.TypedDict):

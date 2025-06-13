@@ -4,26 +4,26 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.suggestion_response import SuggestionResponse
-from .raw_client import AsyncRawStyleSuggestionsClient, RawStyleSuggestionsClient
+from ..types.style_check_response import StyleCheckResponse
+from .raw_client import AsyncRawStyleChecksClient, RawStyleChecksClient
 
 
-class StyleSuggestionsClient:
+class StyleChecksClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
-        self._raw_client = RawStyleSuggestionsClient(client_wrapper=client_wrapper)
+        self._raw_client = RawStyleChecksClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> RawStyleSuggestionsClient:
+    def with_raw_response(self) -> RawStyleChecksClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        RawStyleSuggestionsClient
+        RawStyleChecksClient
         """
         return self._raw_client
 
-    def create_style_suggestion(
+    def create_style_check(
         self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.Optional[typing.Any]:
         """
@@ -41,19 +41,22 @@ class StyleSuggestionsClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
-        client.style_suggestions.create_style_suggestion(
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_checks.create_style_check(
             document_id="document_id",
         )
         """
-        _response = self._raw_client.create_style_suggestion(document_id=document_id, request_options=request_options)
+        _response = self._raw_client.create_style_check(document_id=document_id, request_options=request_options)
         return _response.data
 
-    def get_style_suggestion(
+    def get_style_check(
         self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> SuggestionResponse:
+    ) -> StyleCheckResponse:
         """
         Parameters
         ----------
@@ -66,41 +69,44 @@ class StyleSuggestionsClient:
 
         Returns
         -------
-        SuggestionResponse
+        StyleCheckResponse
             Successful Response
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
-        client.style_suggestions.get_style_suggestion(
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
+        client.style_checks.get_style_check(
             workflow_id="workflow_id",
             document_id="document_id",
         )
         """
-        _response = self._raw_client.get_style_suggestion(
+        _response = self._raw_client.get_style_check(
             workflow_id, document_id=document_id, request_options=request_options
         )
         return _response.data
 
 
-class AsyncStyleSuggestionsClient:
+class AsyncStyleChecksClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
-        self._raw_client = AsyncRawStyleSuggestionsClient(client_wrapper=client_wrapper)
+        self._raw_client = AsyncRawStyleChecksClient(client_wrapper=client_wrapper)
 
     @property
-    def with_raw_response(self) -> AsyncRawStyleSuggestionsClient:
+    def with_raw_response(self) -> AsyncRawStyleChecksClient:
         """
         Retrieves a raw implementation of this client that returns raw responses.
 
         Returns
         -------
-        AsyncRawStyleSuggestionsClient
+        AsyncRawStyleChecksClient
         """
         return self._raw_client
 
-    async def create_style_suggestion(
+    async def create_style_check(
         self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.Optional[typing.Any]:
         """
@@ -120,27 +126,28 @@ class AsyncStyleSuggestionsClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
-            await client.style_suggestions.create_style_suggestion(
+            await client.style_checks.create_style_check(
                 document_id="document_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.create_style_suggestion(
-            document_id=document_id, request_options=request_options
-        )
+        _response = await self._raw_client.create_style_check(document_id=document_id, request_options=request_options)
         return _response.data
 
-    async def get_style_suggestion(
+    async def get_style_check(
         self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> SuggestionResponse:
+    ) -> StyleCheckResponse:
         """
         Parameters
         ----------
@@ -153,20 +160,23 @@ class AsyncStyleSuggestionsClient:
 
         Returns
         -------
-        SuggestionResponse
+        StyleCheckResponse
             Successful Response
 
         Examples
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
-            await client.style_suggestions.get_style_suggestion(
+            await client.style_checks.get_style_check(
                 workflow_id="workflow_id",
                 document_id="document_id",
             )
@@ -174,7 +184,7 @@ class AsyncStyleSuggestionsClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_suggestion(
+        _response = await self._raw_client.get_style_check(
             workflow_id, document_id=document_id, request_options=request_options
         )
         return _response.data

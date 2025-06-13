@@ -8,7 +8,7 @@ import typing
 
 import typing_extensions
 
-from acrolinx576596.core.serialization import FieldMetadata
+from acrolinx.core.serialization import FieldMetadata
 
 
 class Base(typing_extensions.TypedDict):

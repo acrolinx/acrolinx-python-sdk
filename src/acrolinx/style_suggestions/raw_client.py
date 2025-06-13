@@ -11,14 +11,14 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
-from ..types.rewrite_response import RewriteResponse
+from ..types.suggestion_response import SuggestionResponse
 
 
-class RawStyleRewritesClient:
+class RawStyleSuggestionsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def create_style_rewrite(
+    def create_style_suggestion(
         self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[typing.Optional[typing.Any]]:
         """
@@ -35,7 +35,7 @@ class RawStyleRewritesClient:
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            "v1/style/rewrites",
+            "v1/style/suggestions",
             method="POST",
             params={
                 "document_id": document_id,
@@ -43,6 +43,8 @@ class RawStyleRewritesClient:
             request_options=request_options,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.Optional[typing.Any],
@@ -68,9 +70,9 @@ class RawStyleRewritesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_style_rewrite(
+    def get_style_suggestion(
         self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[RewriteResponse]:
+    ) -> HttpResponse[SuggestionResponse]:
         """
         Parameters
         ----------
@@ -83,11 +85,11 @@ class RawStyleRewritesClient:
 
         Returns
         -------
-        HttpResponse[RewriteResponse]
+        HttpResponse[SuggestionResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v1/style/rewrites/{jsonable_encoder(workflow_id)}",
+            f"v1/style/suggestions/{jsonable_encoder(workflow_id)}",
             method="GET",
             params={
                 "document_id": document_id,
@@ -97,9 +99,9 @@ class RawStyleRewritesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    RewriteResponse,
+                    SuggestionResponse,
                     parse_obj_as(
-                        type_=RewriteResponse,  # type: ignore
+                        type_=SuggestionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -121,11 +123,11 @@ class RawStyleRewritesClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawStyleRewritesClient:
+class AsyncRawStyleSuggestionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def create_style_rewrite(
+    async def create_style_suggestion(
         self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
         """
@@ -142,7 +144,7 @@ class AsyncRawStyleRewritesClient:
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "v1/style/rewrites",
+            "v1/style/suggestions",
             method="POST",
             params={
                 "document_id": document_id,
@@ -150,6 +152,8 @@ class AsyncRawStyleRewritesClient:
             request_options=request_options,
         )
         try:
+            if _response is None or not _response.text.strip():
+                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
                     typing.Optional[typing.Any],
@@ -175,9 +179,9 @@ class AsyncRawStyleRewritesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_style_rewrite(
+    async def get_style_suggestion(
         self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[RewriteResponse]:
+    ) -> AsyncHttpResponse[SuggestionResponse]:
         """
         Parameters
         ----------
@@ -190,11 +194,11 @@ class AsyncRawStyleRewritesClient:
 
         Returns
         -------
-        AsyncHttpResponse[RewriteResponse]
+        AsyncHttpResponse[SuggestionResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v1/style/rewrites/{jsonable_encoder(workflow_id)}",
+            f"v1/style/suggestions/{jsonable_encoder(workflow_id)}",
             method="GET",
             params={
                 "document_id": document_id,
@@ -204,9 +208,9 @@ class AsyncRawStyleRewritesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    RewriteResponse,
+                    SuggestionResponse,
                     parse_obj_as(
-                        type_=RewriteResponse,  # type: ignore
+                        type_=SuggestionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

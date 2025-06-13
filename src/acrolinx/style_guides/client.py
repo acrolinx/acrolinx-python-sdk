@@ -38,9 +38,12 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.get_style_guides()
         """
         _response = self._raw_client.get_style_guides(request_options=request_options)
@@ -62,9 +65,12 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.create_style_guide()
         """
         _response = self._raw_client.create_style_guide(request_options=request_options)
@@ -88,9 +94,12 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.get_style_guide(
             style_guide_id="style_guide_id",
         )
@@ -116,9 +125,12 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.update_style_guide(
             style_guide_id="style_guide_id",
         )
@@ -144,9 +156,12 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx576596 import acrolinx
+        from acrolinx import acrolinx
 
-        client = acrolinx()
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
         client.style_guides.delete_style_guide(
             style_guide_id="style_guide_id",
         )
@@ -188,9 +203,12 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
@@ -220,9 +238,12 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
@@ -254,9 +275,12 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
@@ -290,9 +314,12 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:
@@ -326,9 +353,12 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx576596 import Asyncacrolinx
+        from acrolinx import Asyncacrolinx
 
-        client = Asyncacrolinx()
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+            base_url="https://yourhost.com/path/to/api",
+        )
 
 
         async def main() -> None:

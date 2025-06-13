@@ -16,7 +16,6 @@ from .types import (
 from .errors import UnprocessableEntityError
 from . import style_checks, style_guides, style_rewrites, style_suggestions
 from .client import Asyncacrolinx, acrolinx
-from .environment import acrolinxEnvironment
 from .version import __version__
 
 __all__ = [
@@ -33,7 +32,6 @@ __all__ = [
     "ValidationErrorLocItem",
     "__version__",
     "acrolinx",
-    "acrolinxEnvironment",
     "style_checks",
     "style_guides",
     "style_rewrites",
