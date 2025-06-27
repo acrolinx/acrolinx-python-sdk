@@ -2,3 +2,6 @@
 
 # isort: skip_file
 
+from .types import StyleSuggestionsGetStyleSuggestionResponse
+
+__all__ = ["StyleSuggestionsGetStyleSuggestionResponse"]

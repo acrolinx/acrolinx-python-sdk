@@ -4,14 +4,17 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .scores import Scores
+from .check_options import CheckOptions
+from .score_output import ScoreOutput
+from .style_guide_status import StyleGuideStatus
 from .suggestion import Suggestion
 
 
 class SuggestionResponse(UniversalBaseModel):
-    style_guide_id: str
-    scores: Scores
+    status: StyleGuideStatus
+    scores: typing.Optional[ScoreOutput] = None
     issues: typing.List[Suggestion]
+    check_options: CheckOptions
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

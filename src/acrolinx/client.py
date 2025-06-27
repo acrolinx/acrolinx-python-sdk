@@ -4,6 +4,7 @@ import typing
 
 import httpx
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .environment import acrolinxEnvironment
 from .style_checks.client import AsyncStyleChecksClient, StyleChecksClient
 from .style_guides.client import AsyncStyleGuidesClient, StyleGuidesClient
 from .style_rewrites.client import AsyncStyleRewritesClient, StyleRewritesClient
@@ -16,10 +17,22 @@ class acrolinx:
 
     Parameters
     ----------
-    base_url : str
+    base_url : typing.Optional[str]
         The base url to use for requests from the client.
 
+    environment : acrolinxEnvironment
+        The environment to use for requests from the client. from .environment import acrolinxEnvironment
+
+
+
+        Defaults to acrolinxEnvironment.DEFAULT
+
+
+
     api_key : str
+    headers : typing.Optional[typing.Dict[str, str]]
+        Additional headers to send with every request.
+
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -35,15 +48,16 @@ class acrolinx:
 
     client = acrolinx(
         api_key="YOUR_API_KEY",
-        base_url="https://yourhost.com/path/to/api",
     )
     """
 
     def __init__(
         self,
         *,
-        base_url: str,
+        base_url: typing.Optional[str] = None,
+        environment: acrolinxEnvironment = acrolinxEnvironment.DEFAULT,
         api_key: str,
+        headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -52,8 +66,9 @@ class acrolinx:
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
         self._client_wrapper = SyncClientWrapper(
-            base_url=base_url,
+            base_url=_get_base_url(base_url=base_url, environment=environment),
             api_key=api_key,
+            headers=headers,
             httpx_client=httpx_client
             if httpx_client is not None
             else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
@@ -73,10 +88,22 @@ class Asyncacrolinx:
 
     Parameters
     ----------
-    base_url : str
+    base_url : typing.Optional[str]
         The base url to use for requests from the client.
 
+    environment : acrolinxEnvironment
+        The environment to use for requests from the client. from .environment import acrolinxEnvironment
+
+
+
+        Defaults to acrolinxEnvironment.DEFAULT
+
+
+
     api_key : str
+    headers : typing.Optional[typing.Dict[str, str]]
+        Additional headers to send with every request.
+
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -92,15 +119,16 @@ class Asyncacrolinx:
 
     client = Asyncacrolinx(
         api_key="YOUR_API_KEY",
-        base_url="https://yourhost.com/path/to/api",
     )
     """
 
     def __init__(
         self,
         *,
-        base_url: str,
+        base_url: typing.Optional[str] = None,
+        environment: acrolinxEnvironment = acrolinxEnvironment.DEFAULT,
         api_key: str,
+        headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -109,8 +137,9 @@ class Asyncacrolinx:
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
         self._client_wrapper = AsyncClientWrapper(
-            base_url=base_url,
+            base_url=_get_base_url(base_url=base_url, environment=environment),
             api_key=api_key,
+            headers=headers,
             httpx_client=httpx_client
             if httpx_client is not None
             else httpx.AsyncClient(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
@@ -122,3 +151,12 @@ class Asyncacrolinx:
         self.style_checks = AsyncStyleChecksClient(client_wrapper=self._client_wrapper)
         self.style_suggestions = AsyncStyleSuggestionsClient(client_wrapper=self._client_wrapper)
         self.style_rewrites = AsyncStyleRewritesClient(client_wrapper=self._client_wrapper)
+
+
+def _get_base_url(*, base_url: typing.Optional[str] = None, environment: acrolinxEnvironment) -> str:
+    if base_url is not None:
+        return base_url
+    elif environment is not None:
+        return environment.value
+    else:
+        raise Exception("Please pass in either base_url or environment to construct the client")

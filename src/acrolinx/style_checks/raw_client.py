@@ -3,6 +3,7 @@
 import typing
 from json.decoder import JSONDecodeError
 
+from .. import core
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
@@ -10,8 +11,14 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.dialects import Dialects
 from ..types.http_validation_error import HttpValidationError
-from ..types.style_check_response import StyleCheckResponse
+from ..types.tones import Tones
+from ..types.workflow_response import WorkflowResponse
+from .types.style_checks_get_style_check_response import StyleChecksGetStyleCheckResponse
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class RawStyleChecksClient:
@@ -19,37 +26,60 @@ class RawStyleChecksClient:
         self._client_wrapper = client_wrapper
 
     def create_style_check(
-        self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        self,
+        *,
+        file_upload: core.File,
+        dialect: typing.Optional[Dialects] = OMIT,
+        tone: typing.Optional[Tones] = OMIT,
+        style_guide: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[WorkflowResponse]:
         """
+        Start a style and brand check run. Returns a workflow ID for each file.
+
         Parameters
         ----------
-        document_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        dialect : typing.Optional[Dialects]
+            The intended dialect of the text to edit.
+
+        tone : typing.Optional[Tones]
+            The intended tone of the text to edit.
+
+        style_guide : typing.Optional[str]
+            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Optional[typing.Any]]
+        HttpResponse[WorkflowResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/style/checks",
             method="POST",
-            params={
-                "document_id": document_id,
+            data={
+                "dialect": dialect,
+                "tone": tone,
+                "style_guide": style_guide,
+            },
+            files={
+                "file_upload": file_upload,
             },
             request_options=request_options,
+            omit=OMIT,
+            force_multipart=True,
         )
         try:
-            if _response is None or not _response.text.strip():
-                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    WorkflowResponse,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=WorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -71,37 +101,34 @@ class RawStyleChecksClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_style_check(
-        self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[StyleCheckResponse]:
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StyleChecksGetStyleCheckResponse]:
         """
+        get the results of a style and brand check run.
+
         Parameters
         ----------
         workflow_id : str
-
-        document_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[StyleCheckResponse]
+        HttpResponse[StyleChecksGetStyleCheckResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v1/style/checks/{jsonable_encoder(workflow_id)}",
             method="GET",
-            params={
-                "document_id": document_id,
-            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    StyleCheckResponse,
+                    StyleChecksGetStyleCheckResponse,
                     parse_obj_as(
-                        type_=StyleCheckResponse,  # type: ignore
+                        type_=StyleChecksGetStyleCheckResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -128,37 +155,60 @@ class AsyncRawStyleChecksClient:
         self._client_wrapper = client_wrapper
 
     async def create_style_check(
-        self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        self,
+        *,
+        file_upload: core.File,
+        dialect: typing.Optional[Dialects] = OMIT,
+        tone: typing.Optional[Tones] = OMIT,
+        style_guide: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[WorkflowResponse]:
         """
+        Start a style and brand check run. Returns a workflow ID for each file.
+
         Parameters
         ----------
-        document_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        dialect : typing.Optional[Dialects]
+            The intended dialect of the text to edit.
+
+        tone : typing.Optional[Tones]
+            The intended tone of the text to edit.
+
+        style_guide : typing.Optional[str]
+            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
+        AsyncHttpResponse[WorkflowResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/style/checks",
             method="POST",
-            params={
-                "document_id": document_id,
+            data={
+                "dialect": dialect,
+                "tone": tone,
+                "style_guide": style_guide,
+            },
+            files={
+                "file_upload": file_upload,
             },
             request_options=request_options,
+            omit=OMIT,
+            force_multipart=True,
         )
         try:
-            if _response is None or not _response.text.strip():
-                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    WorkflowResponse,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=WorkflowResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -180,37 +230,34 @@ class AsyncRawStyleChecksClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_style_check(
-        self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[StyleCheckResponse]:
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StyleChecksGetStyleCheckResponse]:
         """
+        get the results of a style and brand check run.
+
         Parameters
         ----------
         workflow_id : str
-
-        document_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[StyleCheckResponse]
+        AsyncHttpResponse[StyleChecksGetStyleCheckResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/style/checks/{jsonable_encoder(workflow_id)}",
             method="GET",
-            params={
-                "document_id": document_id,
-            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    StyleCheckResponse,
+                    StyleChecksGetStyleCheckResponse,
                     parse_obj_as(
-                        type_=StyleCheckResponse,  # type: ignore
+                        type_=StyleChecksGetStyleCheckResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

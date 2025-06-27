@@ -2,9 +2,14 @@
 
 import typing
 
+from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.style_guide_response import StyleGuideResponse
 from .raw_client import AsyncRawStyleGuidesClient, RawStyleGuidesClient
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class StyleGuidesClient:
@@ -23,17 +28,27 @@ class StyleGuidesClient:
         return self._raw_client
 
     def get_style_guides(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.List[StyleGuideResponse]:
         """
+        Get all style guides.
+
         Parameters
         ----------
+        offset : typing.Optional[int]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.List[StyleGuideResponse]
             Successful Response
 
         Examples
@@ -42,25 +57,34 @@ class StyleGuidesClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
         client.style_guides.get_style_guides()
         """
-        _response = self._raw_client.get_style_guides(request_options=request_options)
+        _response = self._raw_client.get_style_guides(offset=offset, limit=limit, request_options=request_options)
         return _response.data
 
     def create_style_guide(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        file_upload: core.File,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StyleGuideResponse:
         """
         Parameters
         ----------
+        file_upload : core.File
+            See core.File for more documentation
+
+        name : typing.Optional[str]
+            The name of the style guide.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        StyleGuideResponse
             Successful Response
 
         Examples
@@ -69,27 +93,29 @@ class StyleGuidesClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
         client.style_guides.create_style_guide()
         """
-        _response = self._raw_client.create_style_guide(request_options=request_options)
+        _response = self._raw_client.create_style_guide(
+            file_upload=file_upload, name=name, request_options=request_options
+        )
         return _response.data
 
     def get_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> StyleGuideResponse:
         """
         Parameters
         ----------
         style_guide_id : str
+            The ID of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        StyleGuideResponse
             Successful Response
 
         Examples
@@ -98,7 +124,6 @@ class StyleGuidesClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
         client.style_guides.get_style_guide(
             style_guide_id="style_guide_id",
@@ -107,52 +132,21 @@ class StyleGuidesClient:
         _response = self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
         return _response.data
 
-    def update_style_guide(
-        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
-        """
-        Parameters
-        ----------
-        style_guide_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        from acrolinx import acrolinx
-
-        client = acrolinx(
-            api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
-        )
-        client.style_guides.update_style_guide(
-            style_guide_id="style_guide_id",
-        )
-        """
-        _response = self._raw_client.update_style_guide(style_guide_id, request_options=request_options)
-        return _response.data
-
     def delete_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> None:
         """
         Parameters
         ----------
         style_guide_id : str
+            The ID of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
-            Successful Response
+        None
 
         Examples
         --------
@@ -160,13 +154,50 @@ class StyleGuidesClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
         client.style_guides.delete_style_guide(
             style_guide_id="style_guide_id",
         )
         """
         _response = self._raw_client.delete_style_guide(style_guide_id, request_options=request_options)
+        return _response.data
+
+    def update_style_guide(
+        self,
+        style_guide_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StyleGuideResponse:
+        """
+        Parameters
+        ----------
+        style_guide_id : str
+            The ID of the style guide.
+
+        name : typing.Optional[str]
+            The name of the style guide.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StyleGuideResponse
+            Successful Response
+
+        Examples
+        --------
+        from acrolinx import acrolinx
+
+        client = acrolinx(
+            api_key="YOUR_API_KEY",
+        )
+        client.style_guides.update_style_guide(
+            style_guide_id="style_guide_id",
+        )
+        """
+        _response = self._raw_client.update_style_guide(style_guide_id, name=name, request_options=request_options)
         return _response.data
 
 
@@ -186,17 +217,27 @@ class AsyncStyleGuidesClient:
         return self._raw_client
 
     async def get_style_guides(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.List[StyleGuideResponse]:
         """
+        Get all style guides.
+
         Parameters
         ----------
+        offset : typing.Optional[int]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        typing.List[StyleGuideResponse]
             Successful Response
 
         Examples
@@ -207,7 +248,6 @@ class AsyncStyleGuidesClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
@@ -217,21 +257,31 @@ class AsyncStyleGuidesClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_guides(request_options=request_options)
+        _response = await self._raw_client.get_style_guides(offset=offset, limit=limit, request_options=request_options)
         return _response.data
 
     async def create_style_guide(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        file_upload: core.File,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StyleGuideResponse:
         """
         Parameters
         ----------
+        file_upload : core.File
+            See core.File for more documentation
+
+        name : typing.Optional[str]
+            The name of the style guide.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        StyleGuideResponse
             Successful Response
 
         Examples
@@ -242,7 +292,6 @@ class AsyncStyleGuidesClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
@@ -252,23 +301,26 @@ class AsyncStyleGuidesClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.create_style_guide(request_options=request_options)
+        _response = await self._raw_client.create_style_guide(
+            file_upload=file_upload, name=name, request_options=request_options
+        )
         return _response.data
 
     async def get_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> StyleGuideResponse:
         """
         Parameters
         ----------
         style_guide_id : str
+            The ID of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        StyleGuideResponse
             Successful Response
 
         Examples
@@ -279,7 +331,6 @@ class AsyncStyleGuidesClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
@@ -294,60 +345,21 @@ class AsyncStyleGuidesClient:
         _response = await self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
         return _response.data
 
-    async def update_style_guide(
-        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
-        """
-        Parameters
-        ----------
-        style_guide_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Optional[typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from acrolinx import Asyncacrolinx
-
-        client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
-        )
-
-
-        async def main() -> None:
-            await client.style_guides.update_style_guide(
-                style_guide_id="style_guide_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.update_style_guide(style_guide_id, request_options=request_options)
-        return _response.data
-
     async def delete_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+    ) -> None:
         """
         Parameters
         ----------
         style_guide_id : str
+            The ID of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
-            Successful Response
+        None
 
         Examples
         --------
@@ -357,7 +369,6 @@ class AsyncStyleGuidesClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
@@ -370,4 +381,52 @@ class AsyncStyleGuidesClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.delete_style_guide(style_guide_id, request_options=request_options)
+        return _response.data
+
+    async def update_style_guide(
+        self,
+        style_guide_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> StyleGuideResponse:
+        """
+        Parameters
+        ----------
+        style_guide_id : str
+            The ID of the style guide.
+
+        name : typing.Optional[str]
+            The name of the style guide.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        StyleGuideResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from acrolinx import Asyncacrolinx
+
+        client = Asyncacrolinx(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.style_guides.update_style_guide(
+                style_guide_id="style_guide_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_style_guide(
+            style_guide_id, name=name, request_options=request_options
+        )
         return _response.data

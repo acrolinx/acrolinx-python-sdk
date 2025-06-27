@@ -2,10 +2,17 @@
 
 import typing
 
+from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.rewrite_response import RewriteResponse
+from ..types.dialects import Dialects
+from ..types.tones import Tones
+from ..types.workflow_response import WorkflowResponse
 from .raw_client import AsyncRawStyleRewritesClient, RawStyleRewritesClient
+from .types.style_rewrites_get_style_rewrite_response import StyleRewritesGetStyleRewriteResponse
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class StyleRewritesClient:
@@ -24,19 +31,37 @@ class StyleRewritesClient:
         return self._raw_client
 
     def create_style_rewrite(
-        self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        file_upload: core.File,
+        dialect: typing.Optional[Dialects] = OMIT,
+        tone: typing.Optional[Tones] = OMIT,
+        style_guide: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkflowResponse:
         """
+        Start a rewrite run for one or many files. Returns a workflow ID for each file.
+
         Parameters
         ----------
-        document_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        dialect : typing.Optional[Dialects]
+            The intended dialect of the text to edit.
+
+        tone : typing.Optional[Tones]
+            The intended tone of the text to edit.
+
+        style_guide : typing.Optional[str]
+            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        WorkflowResponse
             Successful Response
 
         Examples
@@ -45,31 +70,34 @@ class StyleRewritesClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
-        client.style_rewrites.create_style_rewrite(
-            document_id="document_id",
-        )
+        client.style_rewrites.create_style_rewrite()
         """
-        _response = self._raw_client.create_style_rewrite(document_id=document_id, request_options=request_options)
+        _response = self._raw_client.create_style_rewrite(
+            file_upload=file_upload,
+            dialect=dialect,
+            tone=tone,
+            style_guide=style_guide,
+            request_options=request_options,
+        )
         return _response.data
 
     def get_style_rewrite(
-        self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> RewriteResponse:
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StyleRewritesGetStyleRewriteResponse:
         """
+        Get the results of a rewrite run.
+
         Parameters
         ----------
         workflow_id : str
 
-        document_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        RewriteResponse
+        StyleRewritesGetStyleRewriteResponse
             Successful Response
 
         Examples
@@ -78,16 +106,12 @@ class StyleRewritesClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
         client.style_rewrites.get_style_rewrite(
             workflow_id="workflow_id",
-            document_id="document_id",
         )
         """
-        _response = self._raw_client.get_style_rewrite(
-            workflow_id, document_id=document_id, request_options=request_options
-        )
+        _response = self._raw_client.get_style_rewrite(workflow_id, request_options=request_options)
         return _response.data
 
 
@@ -107,19 +131,37 @@ class AsyncStyleRewritesClient:
         return self._raw_client
 
     async def create_style_rewrite(
-        self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        file_upload: core.File,
+        dialect: typing.Optional[Dialects] = OMIT,
+        tone: typing.Optional[Tones] = OMIT,
+        style_guide: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkflowResponse:
         """
+        Start a rewrite run for one or many files. Returns a workflow ID for each file.
+
         Parameters
         ----------
-        document_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        dialect : typing.Optional[Dialects]
+            The intended dialect of the text to edit.
+
+        tone : typing.Optional[Tones]
+            The intended tone of the text to edit.
+
+        style_guide : typing.Optional[str]
+            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        WorkflowResponse
             Successful Response
 
         Examples
@@ -130,39 +172,40 @@ class AsyncStyleRewritesClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
         async def main() -> None:
-            await client.style_rewrites.create_style_rewrite(
-                document_id="document_id",
-            )
+            await client.style_rewrites.create_style_rewrite()
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.create_style_rewrite(
-            document_id=document_id, request_options=request_options
+            file_upload=file_upload,
+            dialect=dialect,
+            tone=tone,
+            style_guide=style_guide,
+            request_options=request_options,
         )
         return _response.data
 
     async def get_style_rewrite(
-        self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> RewriteResponse:
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StyleRewritesGetStyleRewriteResponse:
         """
+        Get the results of a rewrite run.
+
         Parameters
         ----------
         workflow_id : str
-
-        document_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        RewriteResponse
+        StyleRewritesGetStyleRewriteResponse
             Successful Response
 
         Examples
@@ -173,20 +216,16 @@ class AsyncStyleRewritesClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
         async def main() -> None:
             await client.style_rewrites.get_style_rewrite(
                 workflow_id="workflow_id",
-                document_id="document_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_rewrite(
-            workflow_id, document_id=document_id, request_options=request_options
-        )
+        _response = await self._raw_client.get_style_rewrite(workflow_id, request_options=request_options)
         return _response.data

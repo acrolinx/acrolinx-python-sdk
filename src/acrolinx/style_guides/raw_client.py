@@ -3,6 +3,7 @@
 import typing
 from json.decoder import JSONDecodeError
 
+from .. import core
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
@@ -11,6 +12,10 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
+from ..types.style_guide_response import StyleGuideResponse
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class RawStyleGuidesClient:
@@ -18,106 +23,44 @@ class RawStyleGuidesClient:
         self._client_wrapper = client_wrapper
 
     def get_style_guides(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
+        self,
+        *,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.List[StyleGuideResponse]]:
         """
+        Get all style guides.
+
         Parameters
         ----------
+        offset : typing.Optional[int]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Optional[typing.Any]]
+        HttpResponse[typing.List[StyleGuideResponse]]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/style-guides",
             method="GET",
+            params={
+                "offset": offset,
+                "limit": limit,
+            },
             request_options=request_options,
         )
         try:
-            if _response is None or not _response.text.strip():
-                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    typing.List[StyleGuideResponse],
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def create_style_guide(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
-        """
-        Parameters
-        ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[typing.Optional[typing.Any]]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            "v1/style-guides",
-            method="POST",
-            request_options=request_options,
-        )
-        try:
-            if _response is None or not _response.text.strip():
-                return HttpResponse(response=_response, data=None)
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    typing.Optional[typing.Any],
-                    parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def get_style_guide(
-        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
-        """
-        Parameters
-        ----------
-        style_guide_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[typing.Optional[typing.Any]]
-            Successful Response
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if _response is None or not _response.text.strip():
-                return HttpResponse(response=_response, data=None)
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    typing.Optional[typing.Any],
-                    parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=typing.List[StyleGuideResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -138,35 +81,97 @@ class RawStyleGuidesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def update_style_guide(
-        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
+    def create_style_guide(
+        self,
+        *,
+        file_upload: core.File,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[StyleGuideResponse]:
         """
         Parameters
         ----------
-        style_guide_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        name : typing.Optional[str]
+            The name of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Optional[typing.Any]]
+        HttpResponse[StyleGuideResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "v1/style-guides",
+            method="POST",
+            data={
+                "name": name,
+            },
+            files={
+                "file_upload": file_upload,
+            },
+            request_options=request_options,
+            omit=OMIT,
+            force_multipart=True,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StyleGuideResponse,
+                    parse_obj_as(
+                        type_=StyleGuideResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_style_guide(
+        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[StyleGuideResponse]:
+        """
+        Parameters
+        ----------
+        style_guide_id : str
+            The ID of the style guide.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StyleGuideResponse]
             Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
-            method="PUT",
+            method="GET",
             request_options=request_options,
         )
         try:
-            if _response is None or not _response.text.strip():
-                return HttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    StyleGuideResponse,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=StyleGuideResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -189,19 +194,19 @@ class RawStyleGuidesClient:
 
     def delete_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Optional[typing.Any]]:
+    ) -> HttpResponse[None]:
         """
         Parameters
         ----------
         style_guide_id : str
+            The ID of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Optional[typing.Any]]
-            Successful Response
+        HttpResponse[None]
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
@@ -209,13 +214,66 @@ class RawStyleGuidesClient:
             request_options=request_options,
         )
         try:
-            if _response is None or not _response.text.strip():
+            if 200 <= _response.status_code < 300:
                 return HttpResponse(response=_response, data=None)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update_style_guide(
+        self,
+        style_guide_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[StyleGuideResponse]:
+        """
+        Parameters
+        ----------
+        style_guide_id : str
+            The ID of the style guide.
+
+        name : typing.Optional[str]
+            The name of the style guide.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[StyleGuideResponse]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
+            method="PATCH",
+            json={
+                "name": name,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    StyleGuideResponse,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=StyleGuideResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -242,106 +300,44 @@ class AsyncRawStyleGuidesClient:
         self._client_wrapper = client_wrapper
 
     async def get_style_guides(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+        self,
+        *,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.List[StyleGuideResponse]]:
         """
+        Get all style guides.
+
         Parameters
         ----------
+        offset : typing.Optional[int]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
+        AsyncHttpResponse[typing.List[StyleGuideResponse]]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/style-guides",
             method="GET",
+            params={
+                "offset": offset,
+                "limit": limit,
+            },
             request_options=request_options,
         )
         try:
-            if _response is None or not _response.text.strip():
-                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    typing.List[StyleGuideResponse],
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def create_style_guide(
-        self, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
-        """
-        Parameters
-        ----------
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            "v1/style-guides",
-            method="POST",
-            request_options=request_options,
-        )
-        try:
-            if _response is None or not _response.text.strip():
-                return AsyncHttpResponse(response=_response, data=None)
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    typing.Optional[typing.Any],
-                    parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def get_style_guide(
-        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
-        """
-        Parameters
-        ----------
-        style_guide_id : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
-            Successful Response
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
-            method="GET",
-            request_options=request_options,
-        )
-        try:
-            if _response is None or not _response.text.strip():
-                return AsyncHttpResponse(response=_response, data=None)
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    typing.Optional[typing.Any],
-                    parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=typing.List[StyleGuideResponse],  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -362,35 +358,97 @@ class AsyncRawStyleGuidesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def update_style_guide(
-        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+    async def create_style_guide(
+        self,
+        *,
+        file_upload: core.File,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StyleGuideResponse]:
         """
         Parameters
         ----------
-        style_guide_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        name : typing.Optional[str]
+            The name of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
+        AsyncHttpResponse[StyleGuideResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "v1/style-guides",
+            method="POST",
+            data={
+                "name": name,
+            },
+            files={
+                "file_upload": file_upload,
+            },
+            request_options=request_options,
+            omit=OMIT,
+            force_multipart=True,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    StyleGuideResponse,
+                    parse_obj_as(
+                        type_=StyleGuideResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_style_guide(
+        self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[StyleGuideResponse]:
+        """
+        Parameters
+        ----------
+        style_guide_id : str
+            The ID of the style guide.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StyleGuideResponse]
             Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
-            method="PUT",
+            method="GET",
             request_options=request_options,
         )
         try:
-            if _response is None or not _response.text.strip():
-                return AsyncHttpResponse(response=_response, data=None)
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    StyleGuideResponse,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=StyleGuideResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -413,19 +471,19 @@ class AsyncRawStyleGuidesClient:
 
     async def delete_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Optional[typing.Any]]:
+    ) -> AsyncHttpResponse[None]:
         """
         Parameters
         ----------
         style_guide_id : str
+            The ID of the style guide.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Optional[typing.Any]]
-            Successful Response
+        AsyncHttpResponse[None]
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
@@ -433,13 +491,66 @@ class AsyncRawStyleGuidesClient:
             request_options=request_options,
         )
         try:
-            if _response is None or not _response.text.strip():
+            if 200 <= _response.status_code < 300:
                 return AsyncHttpResponse(response=_response, data=None)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def update_style_guide(
+        self,
+        style_guide_id: str,
+        *,
+        name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[StyleGuideResponse]:
+        """
+        Parameters
+        ----------
+        style_guide_id : str
+            The ID of the style guide.
+
+        name : typing.Optional[str]
+            The name of the style guide.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[StyleGuideResponse]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/style-guides/{jsonable_encoder(style_guide_id)}",
+            method="PATCH",
+            json={
+                "name": name,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Optional[typing.Any],
+                    StyleGuideResponse,
                     parse_obj_as(
-                        type_=typing.Optional[typing.Any],  # type: ignore
+                        type_=StyleGuideResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

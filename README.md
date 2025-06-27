@@ -24,7 +24,6 @@ from acrolinx import acrolinx
 
 client = acrolinx(
     api_key="YOUR_API_KEY",
-    base_url="https://yourhost.com/path/to/api",
 )
 client.style_guides.create_style_guide()
 ```
@@ -40,7 +39,6 @@ from acrolinx import Asyncacrolinx
 
 client = Asyncacrolinx(
     api_key="YOUR_API_KEY",
-    base_url="https://yourhost.com/path/to/api",
 )
 
 

@@ -2,10 +2,17 @@
 
 import typing
 
+from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.suggestion_response import SuggestionResponse
+from ..types.dialects import Dialects
+from ..types.tones import Tones
+from ..types.workflow_response import WorkflowResponse
 from .raw_client import AsyncRawStyleSuggestionsClient, RawStyleSuggestionsClient
+from .types.style_suggestions_get_style_suggestion_response import StyleSuggestionsGetStyleSuggestionResponse
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class StyleSuggestionsClient:
@@ -24,19 +31,37 @@ class StyleSuggestionsClient:
         return self._raw_client
 
     def create_style_suggestion(
-        self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        file_upload: core.File,
+        dialect: typing.Optional[Dialects] = OMIT,
+        tone: typing.Optional[Tones] = OMIT,
+        style_guide: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkflowResponse:
         """
+        Start a style and brand suggestion run. Returns a workflow ID for each file.
+
         Parameters
         ----------
-        document_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        dialect : typing.Optional[Dialects]
+            The intended dialect of the text to edit.
+
+        tone : typing.Optional[Tones]
+            The intended tone of the text to edit.
+
+        style_guide : typing.Optional[str]
+            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        WorkflowResponse
             Successful Response
 
         Examples
@@ -45,31 +70,34 @@ class StyleSuggestionsClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
-        client.style_suggestions.create_style_suggestion(
-            document_id="document_id",
-        )
+        client.style_suggestions.create_style_suggestion()
         """
-        _response = self._raw_client.create_style_suggestion(document_id=document_id, request_options=request_options)
+        _response = self._raw_client.create_style_suggestion(
+            file_upload=file_upload,
+            dialect=dialect,
+            tone=tone,
+            style_guide=style_guide,
+            request_options=request_options,
+        )
         return _response.data
 
     def get_style_suggestion(
-        self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> SuggestionResponse:
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StyleSuggestionsGetStyleSuggestionResponse:
         """
+        Get the results of a suggestion run.
+
         Parameters
         ----------
         workflow_id : str
 
-        document_id : str
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SuggestionResponse
+        StyleSuggestionsGetStyleSuggestionResponse
             Successful Response
 
         Examples
@@ -78,16 +106,12 @@ class StyleSuggestionsClient:
 
         client = acrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
         client.style_suggestions.get_style_suggestion(
             workflow_id="workflow_id",
-            document_id="document_id",
         )
         """
-        _response = self._raw_client.get_style_suggestion(
-            workflow_id, document_id=document_id, request_options=request_options
-        )
+        _response = self._raw_client.get_style_suggestion(workflow_id, request_options=request_options)
         return _response.data
 
 
@@ -107,19 +131,37 @@ class AsyncStyleSuggestionsClient:
         return self._raw_client
 
     async def create_style_suggestion(
-        self, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Optional[typing.Any]:
+        self,
+        *,
+        file_upload: core.File,
+        dialect: typing.Optional[Dialects] = OMIT,
+        tone: typing.Optional[Tones] = OMIT,
+        style_guide: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkflowResponse:
         """
+        Start a style and brand suggestion run. Returns a workflow ID for each file.
+
         Parameters
         ----------
-        document_id : str
+        file_upload : core.File
+            See core.File for more documentation
+
+        dialect : typing.Optional[Dialects]
+            The intended dialect of the text to edit.
+
+        tone : typing.Optional[Tones]
+            The intended tone of the text to edit.
+
+        style_guide : typing.Optional[str]
+            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Optional[typing.Any]
+        WorkflowResponse
             Successful Response
 
         Examples
@@ -130,39 +172,40 @@ class AsyncStyleSuggestionsClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
         async def main() -> None:
-            await client.style_suggestions.create_style_suggestion(
-                document_id="document_id",
-            )
+            await client.style_suggestions.create_style_suggestion()
 
 
         asyncio.run(main())
         """
         _response = await self._raw_client.create_style_suggestion(
-            document_id=document_id, request_options=request_options
+            file_upload=file_upload,
+            dialect=dialect,
+            tone=tone,
+            style_guide=style_guide,
+            request_options=request_options,
         )
         return _response.data
 
     async def get_style_suggestion(
-        self, workflow_id: str, *, document_id: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> SuggestionResponse:
+        self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> StyleSuggestionsGetStyleSuggestionResponse:
         """
+        Get the results of a suggestion run.
+
         Parameters
         ----------
         workflow_id : str
-
-        document_id : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        SuggestionResponse
+        StyleSuggestionsGetStyleSuggestionResponse
             Successful Response
 
         Examples
@@ -173,20 +216,16 @@ class AsyncStyleSuggestionsClient:
 
         client = Asyncacrolinx(
             api_key="YOUR_API_KEY",
-            base_url="https://yourhost.com/path/to/api",
         )
 
 
         async def main() -> None:
             await client.style_suggestions.get_style_suggestion(
                 workflow_id="workflow_id",
-                document_id="document_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_suggestion(
-            workflow_id, document_id=document_id, request_options=request_options
-        )
+        _response = await self._raw_client.get_style_suggestion(workflow_id, request_options=request_options)
         return _response.data

@@ -4,13 +4,27 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .issue_category import IssueCategory
+from .subcategory import Subcategory
 
 
 class Issue(UniversalBaseModel):
-    start_index: int
-    length: int
-    text: str
-    category: str
+    original: str = pydantic.Field()
+    """
+    The original text
+    """
+
+    char_index: int = pydantic.Field()
+    """
+    The start index of the change
+    """
+
+    subcategory: Subcategory = pydantic.Field()
+    """
+    The sub-category of the change
+    """
+
+    category: typing.Optional[IssueCategory] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -2,24 +2,132 @@
 
 # isort: skip_file
 
+from .acrolinx_scorer_activity_output import AcrolinxScorerActivityOutput
+from .analysis import Analysis
+from .check_options import CheckOptions
+from .clarity_score import ClarityScore
+from .content_quality_feedback import ContentQualityFeedback
+from .content_scorer_activity_output import ContentScorerActivityOutput
+from .content_suggestions import ContentSuggestions
+from .dialects import Dialects
+from .final_scores import FinalScores
+from .grammar_activity_output import GrammarActivityOutput
+from .grammar_category import GrammarCategory
+from .grammar_change import GrammarChange
+from .grammar_score import GrammarScore
+from .helios_one_workflow_output import HeliosOneWorkflowOutput
 from .http_validation_error import HttpValidationError
+from .initial_scores import InitialScores
 from .issue import Issue
+from .issue_category import IssueCategory
+from .issue_scores import IssueScores
+from .merging_activity_output import MergingActivityOutput
+from .overall_score import OverallScore
+from .parameters import Parameters
+from .parser_response import ParserResponse
 from .rewrite_response import RewriteResponse
-from .scores import Scores
+from .score_output import ScoreOutput
+from .sentence_length_activity_output import SentenceLengthActivityOutput
+from .sentence_length_category import SentenceLengthCategory
+from .sentence_length_change import SentenceLengthChange
+from .sentence_structure_category import SentenceStructureCategory
+from .sentence_structure_change import SentenceStructureChange
+from .sentence_structure_output import SentenceStructureOutput
+from .simple_vocab_category import SimpleVocabCategory
+from .simple_vocab_change import SimpleVocabChange
+from .simple_vocab_output import SimpleVocabOutput
 from .style_check_response import StyleCheckResponse
+from .style_guide import StyleGuide
+from .style_guide_category import StyleGuideCategory
+from .style_guide_change import StyleGuideChange
+from .style_guide_output import StyleGuideOutput
+from .style_guide_response import StyleGuideResponse
+from .style_guide_score import StyleGuideScore
+from .style_guide_status import StyleGuideStatus
+from .style_guides import StyleGuides
+from .style_request_body import StyleRequestBody
+from .subcategory import Subcategory
 from .suggestion import Suggestion
 from .suggestion_response import SuggestionResponse
+from .term_replace_activity_output import TermReplaceActivityOutput
+from .term_replace_category import TermReplaceCategory
+from .term_replace_change import TermReplaceChange
+from .terminology_score import TerminologyScore
+from .theia_output import TheiaOutput
+from .tone_category import ToneCategory
+from .tone_change import ToneChange
+from .tone_check_output import ToneCheckOutput
+from .tone_score import ToneScore
+from .tones import Tones
 from .validation_error import ValidationError
 from .validation_error_loc_item import ValidationErrorLocItem
+from .workflow_error import WorkflowError
+from .workflow_response import WorkflowResponse
+from .workflow_status import WorkflowStatus
+from .workflow_status_response import WorkflowStatusResponse
 
 __all__ = [
+    "AcrolinxScorerActivityOutput",
+    "Analysis",
+    "CheckOptions",
+    "ClarityScore",
+    "ContentQualityFeedback",
+    "ContentScorerActivityOutput",
+    "ContentSuggestions",
+    "Dialects",
+    "FinalScores",
+    "GrammarActivityOutput",
+    "GrammarCategory",
+    "GrammarChange",
+    "GrammarScore",
+    "HeliosOneWorkflowOutput",
     "HttpValidationError",
+    "InitialScores",
     "Issue",
+    "IssueCategory",
+    "IssueScores",
+    "MergingActivityOutput",
+    "OverallScore",
+    "Parameters",
+    "ParserResponse",
     "RewriteResponse",
-    "Scores",
+    "ScoreOutput",
+    "SentenceLengthActivityOutput",
+    "SentenceLengthCategory",
+    "SentenceLengthChange",
+    "SentenceStructureCategory",
+    "SentenceStructureChange",
+    "SentenceStructureOutput",
+    "SimpleVocabCategory",
+    "SimpleVocabChange",
+    "SimpleVocabOutput",
     "StyleCheckResponse",
+    "StyleGuide",
+    "StyleGuideCategory",
+    "StyleGuideChange",
+    "StyleGuideOutput",
+    "StyleGuideResponse",
+    "StyleGuideScore",
+    "StyleGuideStatus",
+    "StyleGuides",
+    "StyleRequestBody",
+    "Subcategory",
     "Suggestion",
     "SuggestionResponse",
+    "TermReplaceActivityOutput",
+    "TermReplaceCategory",
+    "TermReplaceChange",
+    "TerminologyScore",
+    "TheiaOutput",
+    "ToneCategory",
+    "ToneChange",
+    "ToneCheckOutput",
+    "ToneScore",
+    "Tones",
     "ValidationError",
     "ValidationErrorLocItem",
+    "WorkflowError",
+    "WorkflowResponse",
+    "WorkflowStatus",
+    "WorkflowStatusResponse",
 ]

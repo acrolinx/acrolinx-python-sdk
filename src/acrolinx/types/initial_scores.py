@@ -4,16 +4,15 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .acrolinx_scorer_activity_output import AcrolinxScorerActivityOutput
+from .content_scorer_activity_output import ContentScorerActivityOutput
+from .issue_scores import IssueScores
 
 
-class Scores(UniversalBaseModel):
-    avg_sentence_length: float
-    avg_word_length: float
-    complexity_score: float
-    readability_score: float
-    sentence_count: int
-    vocabulary_score: float
-    word_count: int
+class InitialScores(UniversalBaseModel):
+    acrolinx_score: typing.Optional[AcrolinxScorerActivityOutput] = None
+    content_score: typing.Optional[ContentScorerActivityOutput] = None
+    issue_score: typing.Optional[IssueScores] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
