@@ -4,4 +4,4 @@ import enum
 
 
 class acrolinxEnvironment(enum.Enum):
-    DEFAULT = "http://helios.api.localhost"
+    DEFAULT = "https://app.acrolinx.cloud"
