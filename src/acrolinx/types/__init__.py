@@ -22,9 +22,9 @@ from .issue import Issue
 from .issue_category import IssueCategory
 from .issue_scores import IssueScores
 from .merging_activity_output import MergingActivityOutput
-from .overall_score import OverallScore
 from .parameters import Parameters
 from .parser_response import ParserResponse
+from .quality_score import QualityScore
 from .rewrite_response import RewriteResponse
 from .score_output import ScoreOutput
 from .sentence_length_activity_output import SentenceLengthActivityOutput
@@ -87,9 +87,9 @@ __all__ = [
     "IssueCategory",
     "IssueScores",
     "MergingActivityOutput",
-    "OverallScore",
     "Parameters",
     "ParserResponse",
+    "QualityScore",
     "RewriteResponse",
     "ScoreOutput",
     "SentenceLengthActivityOutput",

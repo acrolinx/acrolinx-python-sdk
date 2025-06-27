@@ -29,7 +29,7 @@ class acrolinx:
 
 
 
-    api_key : str
+    token : typing.Union[str, typing.Callable[[], str]]
     headers : typing.Optional[typing.Dict[str, str]]
         Additional headers to send with every request.
 
@@ -47,7 +47,7 @@ class acrolinx:
     from acrolinx import acrolinx
 
     client = acrolinx(
-        api_key="YOUR_API_KEY",
+        token="YOUR_TOKEN",
     )
     """
 
@@ -56,7 +56,7 @@ class acrolinx:
         *,
         base_url: typing.Optional[str] = None,
         environment: acrolinxEnvironment = acrolinxEnvironment.DEFAULT,
-        api_key: str,
+        token: typing.Union[str, typing.Callable[[], str]],
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
@@ -67,7 +67,7 @@ class acrolinx:
         )
         self._client_wrapper = SyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
-            api_key=api_key,
+            token=token,
             headers=headers,
             httpx_client=httpx_client
             if httpx_client is not None
@@ -100,7 +100,7 @@ class Asyncacrolinx:
 
 
 
-    api_key : str
+    token : typing.Union[str, typing.Callable[[], str]]
     headers : typing.Optional[typing.Dict[str, str]]
         Additional headers to send with every request.
 
@@ -118,7 +118,7 @@ class Asyncacrolinx:
     from acrolinx import Asyncacrolinx
 
     client = Asyncacrolinx(
-        api_key="YOUR_API_KEY",
+        token="YOUR_TOKEN",
     )
     """
 
@@ -127,7 +127,7 @@ class Asyncacrolinx:
         *,
         base_url: typing.Optional[str] = None,
         environment: acrolinxEnvironment = acrolinxEnvironment.DEFAULT,
-        api_key: str,
+        token: typing.Union[str, typing.Callable[[], str]],
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
@@ -138,7 +138,7 @@ class Asyncacrolinx:
         )
         self._client_wrapper = AsyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
-            api_key=api_key,
+            token=token,
             headers=headers,
             httpx_client=httpx_client
             if httpx_client is not None

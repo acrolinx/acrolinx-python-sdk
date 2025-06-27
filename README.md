@@ -23,7 +23,7 @@ Instantiate and use the client with the following:
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_guides.create_style_guide()
 ```
@@ -38,7 +38,7 @@ import asyncio
 from acrolinx import Asyncacrolinx
 
 client = Asyncacrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 
 

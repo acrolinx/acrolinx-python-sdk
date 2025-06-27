@@ -69,7 +69,7 @@ class StyleRewritesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_rewrites.create_style_rewrite()
         """
@@ -105,7 +105,7 @@ class StyleRewritesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_rewrites.get_style_rewrite(
             workflow_id="workflow_id",
@@ -171,7 +171,7 @@ class AsyncStyleRewritesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -215,7 +215,7 @@ class AsyncStyleRewritesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 

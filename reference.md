@@ -30,7 +30,7 @@ Get all style guides.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_guides.get_style_guides()
 
@@ -92,7 +92,7 @@ client.style_guides.get_style_guides()
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_guides.create_style_guide()
 
@@ -156,7 +156,7 @@ core.File` — See core.File for more documentation
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_guides.get_style_guide(
     style_guide_id="style_guide_id",
@@ -212,7 +212,7 @@ client.style_guides.get_style_guide(
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_guides.delete_style_guide(
     style_guide_id="style_guide_id",
@@ -268,7 +268,7 @@ client.style_guides.delete_style_guide(
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_guides.update_style_guide(
     style_guide_id="style_guide_id",
@@ -347,7 +347,7 @@ Start a style and brand check run. Returns a workflow ID for each file.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_checks.create_style_check()
 
@@ -441,7 +441,7 @@ get the results of a style and brand check run.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_checks.get_style_check(
     workflow_id="workflow_id",
@@ -512,7 +512,7 @@ Start a style and brand suggestion run. Returns a workflow ID for each file.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_suggestions.create_style_suggestion()
 
@@ -606,7 +606,7 @@ Get the results of a suggestion run.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_suggestions.get_style_suggestion(
     workflow_id="workflow_id",
@@ -677,7 +677,7 @@ Start a rewrite run for one or many files. Returns a workflow ID for each file.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_rewrites.create_style_rewrite()
 
@@ -771,7 +771,7 @@ Get the results of a rewrite run.
 from acrolinx import acrolinx
 
 client = acrolinx(
-    api_key="YOUR_API_KEY",
+    token="YOUR_TOKEN",
 )
 client.style_rewrites.get_style_rewrite(
     workflow_id="workflow_id",

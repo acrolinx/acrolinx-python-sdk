@@ -69,7 +69,7 @@ class StyleSuggestionsClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_suggestions.create_style_suggestion()
         """
@@ -105,7 +105,7 @@ class StyleSuggestionsClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_suggestions.get_style_suggestion(
             workflow_id="workflow_id",
@@ -171,7 +171,7 @@ class AsyncStyleSuggestionsClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -215,7 +215,7 @@ class AsyncStyleSuggestionsClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 

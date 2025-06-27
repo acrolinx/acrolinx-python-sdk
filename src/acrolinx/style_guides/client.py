@@ -56,7 +56,7 @@ class StyleGuidesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_guides.get_style_guides()
         """
@@ -92,7 +92,7 @@ class StyleGuidesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_guides.create_style_guide()
         """
@@ -123,7 +123,7 @@ class StyleGuidesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_guides.get_style_guide(
             style_guide_id="style_guide_id",
@@ -153,7 +153,7 @@ class StyleGuidesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_guides.delete_style_guide(
             style_guide_id="style_guide_id",
@@ -191,7 +191,7 @@ class StyleGuidesClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_guides.update_style_guide(
             style_guide_id="style_guide_id",
@@ -247,7 +247,7 @@ class AsyncStyleGuidesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -291,7 +291,7 @@ class AsyncStyleGuidesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -330,7 +330,7 @@ class AsyncStyleGuidesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -368,7 +368,7 @@ class AsyncStyleGuidesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -414,7 +414,7 @@ class AsyncStyleGuidesClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 

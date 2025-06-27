@@ -69,7 +69,7 @@ class StyleChecksClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_checks.create_style_check()
         """
@@ -105,7 +105,7 @@ class StyleChecksClient:
         from acrolinx import acrolinx
 
         client = acrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
         client.style_checks.get_style_check(
             workflow_id="workflow_id",
@@ -171,7 +171,7 @@ class AsyncStyleChecksClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 
@@ -215,7 +215,7 @@ class AsyncStyleChecksClient:
         from acrolinx import Asyncacrolinx
 
         client = Asyncacrolinx(
-            api_key="YOUR_API_KEY",
+            token="YOUR_TOKEN",
         )
 
 

@@ -6,14 +6,14 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .clarity_score import ClarityScore
 from .grammar_score import GrammarScore
-from .overall_score import OverallScore
+from .quality_score import QualityScore
 from .style_guide_score import StyleGuideScore
 from .terminology_score import TerminologyScore
 from .tone_score import ToneScore
 
 
 class ScoreOutput(UniversalBaseModel):
-    overall: OverallScore
+    quality: QualityScore
     clarity: ClarityScore
     grammar: GrammarScore
     style_guide: StyleGuideScore

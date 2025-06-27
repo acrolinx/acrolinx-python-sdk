@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class Analysis(UniversalBaseModel):
-    clarity_score: float
+    clarity_score: typing.Optional[float] = None
     word_count: typing.Optional[int] = None
     sentence_count: typing.Optional[int] = None
     avg_word_length: typing.Optional[float] = None
@@ -17,7 +17,7 @@ class Analysis(UniversalBaseModel):
     lexical_diversity: typing.Optional[float] = None
     vocabulary_complexity: typing.Optional[float] = None
     sentence_complexity: typing.Optional[float] = None
-    tone_score: float
+    tone_score: typing.Optional[float] = None
     informality_score: typing.Optional[float] = None
     liveliness_score: typing.Optional[float] = None
 
