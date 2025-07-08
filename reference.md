@@ -1,6 +1,6 @@
 # Reference
 ## Style Guides
-<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">get_style_guides</a>(...)</code></summary>
+<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">list_style_guides</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-Get all style guides.
+Retrieve all style guides associated with your organization.
 </dd>
 </dl>
 </dd>
@@ -32,7 +32,7 @@ from acrolinx import Acrolinx
 client = Acrolinx(
     token="YOUR_TOKEN",
 )
-client.style_guides.get_style_guides()
+client.style_guides.list_style_guides()
 
 ```
 </dd>
@@ -79,6 +79,20 @@ client.style_guides.get_style_guides()
 <details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">create_style_guide</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new style guide that can be used in checks, suggestions, and rewrites.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -140,9 +154,23 @@ core.File` — See core.File for more documentation
 </dl>
 </details>
 
-<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">get_style_guide</a>(...)</code></summary>
+<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">get_style_guide_by_id</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific style guide by ID, including its metadata such as `name` and `status`.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -158,7 +186,7 @@ from acrolinx import Acrolinx
 client = Acrolinx(
     token="YOUR_TOKEN",
 )
-client.style_guides.get_style_guide(
+client.style_guides.get_style_guide_by_id(
     style_guide_id="style_guide_id",
 )
 
@@ -199,6 +227,20 @@ client.style_guides.get_style_guide(
 <details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">delete_style_guide</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a style guide by ID.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -255,6 +297,20 @@ client.style_guides.delete_style_guide(
 <details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">update_style_guide</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the name of an existing style guide.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -329,7 +385,7 @@ client.style_guides.update_style_guide(
 <dl>
 <dd>
 
-Start a style and brand check run. Returns a workflow ID for each file.
+Start a style and brand check workflow. Returns a workflow ID to use for polling results.
 </dd>
 </dl>
 </dd>
@@ -349,7 +405,11 @@ from acrolinx import Acrolinx
 client = Acrolinx(
     token="YOUR_TOKEN",
 )
-client.style_checks.create_style_check()
+client.style_checks.create_style_check(
+    dialect="american_english",
+    tone="academic",
+    style_guide="style_guide",
+)
 
 ```
 </dd>
@@ -375,7 +435,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**dialect:** `typing.Optional[Dialects]` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
+**dialect:** `Dialects` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
     
 </dd>
 </dl>
@@ -383,7 +443,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**tone:** `typing.Optional[Tones]` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
+**tone:** `Tones` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
     
 </dd>
 </dl>
@@ -391,7 +451,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `typing.Optional[str]` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+**style_guide:** `str` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
     
 </dd>
 </dl>
@@ -423,7 +483,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-get the results of a style and brand check run.
+Retrieve the results of a style and brand check workflow. Returns `running` or `complete` status.
 </dd>
 </dl>
 </dd>
@@ -494,7 +554,7 @@ client.style_checks.get_style_check(
 <dl>
 <dd>
 
-Start a style and brand suggestion run. Returns a workflow ID for each file.
+Start a style and brand suggestion workflow. Returns a workflow ID to use for polling results.
 </dd>
 </dl>
 </dd>
@@ -514,7 +574,11 @@ from acrolinx import Acrolinx
 client = Acrolinx(
     token="YOUR_TOKEN",
 )
-client.style_suggestions.create_style_suggestion()
+client.style_suggestions.create_style_suggestion(
+    dialect="american_english",
+    tone="academic",
+    style_guide="style_guide",
+)
 
 ```
 </dd>
@@ -540,7 +604,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**dialect:** `typing.Optional[Dialects]` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
+**dialect:** `Dialects` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
     
 </dd>
 </dl>
@@ -548,7 +612,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**tone:** `typing.Optional[Tones]` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
+**tone:** `Tones` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
     
 </dd>
 </dl>
@@ -556,7 +620,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `typing.Optional[str]` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+**style_guide:** `str` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
     
 </dd>
 </dl>
@@ -588,7 +652,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-Get the results of a suggestion run.
+Retrieve the results of a style and brand suggestion workflow. Returns `running` or `complete` status.
 </dd>
 </dl>
 </dd>
@@ -659,7 +723,7 @@ client.style_suggestions.get_style_suggestion(
 <dl>
 <dd>
 
-Start a rewrite run for one or many files. Returns a workflow ID for each file.
+Start a style and brand rewrite workflow. Returns a workflow ID to use for polling results.
 </dd>
 </dl>
 </dd>
@@ -679,7 +743,11 @@ from acrolinx import Acrolinx
 client = Acrolinx(
     token="YOUR_TOKEN",
 )
-client.style_rewrites.create_style_rewrite()
+client.style_rewrites.create_style_rewrite(
+    dialect="american_english",
+    tone="academic",
+    style_guide="style_guide",
+)
 
 ```
 </dd>
@@ -705,7 +773,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**dialect:** `typing.Optional[Dialects]` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
+**dialect:** `Dialects` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
     
 </dd>
 </dl>
@@ -713,7 +781,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**tone:** `typing.Optional[Tones]` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
+**tone:** `Tones` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
     
 </dd>
 </dl>
@@ -721,7 +789,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `typing.Optional[str]` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+**style_guide:** `str` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
     
 </dd>
 </dl>
@@ -753,7 +821,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-Get the results of a rewrite run.
+Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 </dd>
 </dl>
 </dd>

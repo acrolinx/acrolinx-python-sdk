@@ -4,7 +4,15 @@ import typing
 
 StyleGuideCategory = typing.Union[
     typing.Literal[
-        "punctuation", "capitalization", "grammar_and_usage", "numbers_and_dates", "formatting_and_structure", "other"
+        "punctuation",
+        "capitalization",
+        "spelling_and_grammar",
+        "numbers_dates_times",
+        "inclusive_language",
+        "tone",
+        "specific_conventions",
+        "clarity_and_readability",
+        "other",
     ],
     typing.Any,
 ]
