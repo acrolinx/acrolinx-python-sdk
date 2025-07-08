@@ -27,9 +27,9 @@ Get all style guides.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_guides.get_style_guides()
@@ -89,9 +89,9 @@ client.style_guides.get_style_guides()
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_guides.create_style_guide()
@@ -120,7 +120,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**name:** `typing.Optional[str]` — The name of the style guide.
+**name:** `typing.Optional[str]` — A friendly name for your style guide to help you identify it later. If left empty, we'll generate one for you.
     
 </dd>
 </dl>
@@ -153,9 +153,9 @@ core.File` — See core.File for more documentation
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_guides.get_style_guide(
@@ -209,9 +209,9 @@ client.style_guides.get_style_guide(
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_guides.delete_style_guide(
@@ -265,9 +265,9 @@ client.style_guides.delete_style_guide(
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_guides.update_style_guide(
@@ -344,9 +344,9 @@ Start a style and brand check run. Returns a workflow ID for each file.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_checks.create_style_check()
@@ -375,7 +375,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**dialect:** `typing.Optional[Dialects]` — The intended dialect of the text to edit.
+**dialect:** `typing.Optional[Dialects]` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
     
 </dd>
 </dl>
@@ -383,7 +383,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**tone:** `typing.Optional[Tones]` — The intended tone of the text to edit.
+**tone:** `typing.Optional[Tones]` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
     
 </dd>
 </dl>
@@ -391,7 +391,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `typing.Optional[str]` — The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+**style_guide:** `typing.Optional[str]` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
     
 </dd>
 </dl>
@@ -438,9 +438,9 @@ get the results of a style and brand check run.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_checks.get_style_check(
@@ -509,9 +509,9 @@ Start a style and brand suggestion run. Returns a workflow ID for each file.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_suggestions.create_style_suggestion()
@@ -540,7 +540,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**dialect:** `typing.Optional[Dialects]` — The intended dialect of the text to edit.
+**dialect:** `typing.Optional[Dialects]` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
     
 </dd>
 </dl>
@@ -548,7 +548,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**tone:** `typing.Optional[Tones]` — The intended tone of the text to edit.
+**tone:** `typing.Optional[Tones]` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
     
 </dd>
 </dl>
@@ -556,7 +556,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `typing.Optional[str]` — The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+**style_guide:** `typing.Optional[str]` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
     
 </dd>
 </dl>
@@ -603,9 +603,9 @@ Get the results of a suggestion run.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_suggestions.get_style_suggestion(
@@ -674,9 +674,9 @@ Start a rewrite run for one or many files. Returns a workflow ID for each file.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_rewrites.create_style_rewrite()
@@ -705,7 +705,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**dialect:** `typing.Optional[Dialects]` — The intended dialect of the text to edit.
+**dialect:** `typing.Optional[Dialects]` — The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
     
 </dd>
 </dl>
@@ -713,7 +713,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**tone:** `typing.Optional[Tones]` — The intended tone of the text to edit.
+**tone:** `typing.Optional[Tones]` — The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
     
 </dd>
 </dl>
@@ -721,7 +721,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `typing.Optional[str]` — The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+**style_guide:** `typing.Optional[str]` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
     
 </dd>
 </dl>
@@ -768,9 +768,9 @@ Get the results of a rewrite run.
 <dd>
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_rewrites.get_style_rewrite(

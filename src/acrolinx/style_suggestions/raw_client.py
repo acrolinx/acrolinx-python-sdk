@@ -10,9 +10,11 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..errors.internal_server_error import InternalServerError
+from ..errors.not_found_error import NotFoundError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.dialects import Dialects
-from ..types.http_validation_error import HttpValidationError
+from ..types.error_response import ErrorResponse
 from ..types.tones import Tones
 from ..types.workflow_response import WorkflowResponse
 from .types.style_suggestions_get_style_suggestion_response import StyleSuggestionsGetStyleSuggestionResponse
@@ -43,13 +45,13 @@ class RawStyleSuggestionsClient:
             See core.File for more documentation
 
         dialect : typing.Optional[Dialects]
-            The intended dialect of the text to edit.
+            The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
 
         tone : typing.Optional[Tones]
-            The intended tone of the text to edit.
+            The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : typing.Optional[str]
-            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -57,7 +59,7 @@ class RawStyleSuggestionsClient:
         Returns
         -------
         HttpResponse[WorkflowResponse]
-            Successful Response
+            Suggestion run started successfully.
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/style/suggestions",
@@ -88,9 +90,20 @@ class RawStyleSuggestionsClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -116,7 +129,7 @@ class RawStyleSuggestionsClient:
         Returns
         -------
         HttpResponse[StyleSuggestionsGetStyleSuggestionResponse]
-            Successful Response
+            The suggestion run results.
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v1/style/suggestions/{jsonable_encoder(workflow_id)}",
@@ -133,13 +146,24 @@ class RawStyleSuggestionsClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -172,13 +196,13 @@ class AsyncRawStyleSuggestionsClient:
             See core.File for more documentation
 
         dialect : typing.Optional[Dialects]
-            The intended dialect of the text to edit.
+            The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
 
         tone : typing.Optional[Tones]
-            The intended tone of the text to edit.
+            The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : typing.Optional[str]
-            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -186,7 +210,7 @@ class AsyncRawStyleSuggestionsClient:
         Returns
         -------
         AsyncHttpResponse[WorkflowResponse]
-            Successful Response
+            Suggestion run started successfully.
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/style/suggestions",
@@ -217,9 +241,20 @@ class AsyncRawStyleSuggestionsClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -245,7 +280,7 @@ class AsyncRawStyleSuggestionsClient:
         Returns
         -------
         AsyncHttpResponse[StyleSuggestionsGetStyleSuggestionResponse]
-            Successful Response
+            The suggestion run results.
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/style/suggestions/{jsonable_encoder(workflow_id)}",
@@ -262,13 +297,24 @@ class AsyncRawStyleSuggestionsClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

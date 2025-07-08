@@ -48,13 +48,13 @@ class StyleSuggestionsClient:
             See core.File for more documentation
 
         dialect : typing.Optional[Dialects]
-            The intended dialect of the text to edit.
+            The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
 
         tone : typing.Optional[Tones]
-            The intended tone of the text to edit.
+            The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : typing.Optional[str]
-            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -62,13 +62,13 @@ class StyleSuggestionsClient:
         Returns
         -------
         WorkflowResponse
-            Successful Response
+            Suggestion run started successfully.
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_suggestions.create_style_suggestion()
@@ -98,13 +98,13 @@ class StyleSuggestionsClient:
         Returns
         -------
         StyleSuggestionsGetStyleSuggestionResponse
-            Successful Response
+            The suggestion run results.
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_suggestions.get_style_suggestion(
@@ -148,13 +148,13 @@ class AsyncStyleSuggestionsClient:
             See core.File for more documentation
 
         dialect : typing.Optional[Dialects]
-            The intended dialect of the text to edit.
+            The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
 
         tone : typing.Optional[Tones]
-            The intended tone of the text to edit.
+            The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : typing.Optional[str]
-            The style guide to use for the text to edit. Can be a style guide ID or the name of a generic style guide, e.g. 'ap', 'chicago', or 'microsoft'.
+            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -162,15 +162,15 @@ class AsyncStyleSuggestionsClient:
         Returns
         -------
         WorkflowResponse
-            Successful Response
+            Suggestion run started successfully.
 
         Examples
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 
@@ -206,15 +206,15 @@ class AsyncStyleSuggestionsClient:
         Returns
         -------
         StyleSuggestionsGetStyleSuggestionResponse
-            Successful Response
+            The suggestion run results.
 
         Examples
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 

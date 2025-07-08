@@ -10,8 +10,9 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..errors.internal_server_error import InternalServerError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.http_validation_error import HttpValidationError
+from ..types.error_response import ErrorResponse
 from ..types.style_guide_response import StyleGuideResponse
 
 # this is used as the default value for optional parameters
@@ -69,9 +70,9 @@ class RawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -95,7 +96,7 @@ class RawStyleGuidesClient:
             See core.File for more documentation
 
         name : typing.Optional[str]
-            The name of the style guide.
+            A friendly name for your style guide to help you identify it later. If left empty, we'll generate one for you.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -103,7 +104,7 @@ class RawStyleGuidesClient:
         Returns
         -------
         HttpResponse[StyleGuideResponse]
-            Successful Response
+            The style guide was created successfully and is being processed.
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/style-guides",
@@ -132,9 +133,20 @@ class RawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -180,9 +192,9 @@ class RawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -220,9 +232,9 @@ class RawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -282,9 +294,9 @@ class RawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -346,9 +358,9 @@ class AsyncRawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -372,7 +384,7 @@ class AsyncRawStyleGuidesClient:
             See core.File for more documentation
 
         name : typing.Optional[str]
-            The name of the style guide.
+            A friendly name for your style guide to help you identify it later. If left empty, we'll generate one for you.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -380,7 +392,7 @@ class AsyncRawStyleGuidesClient:
         Returns
         -------
         AsyncHttpResponse[StyleGuideResponse]
-            Successful Response
+            The style guide was created successfully and is being processed.
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/style-guides",
@@ -409,9 +421,20 @@ class AsyncRawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -457,9 +480,9 @@ class AsyncRawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -497,9 +520,9 @@ class AsyncRawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -559,9 +582,9 @@ class AsyncRawStyleGuidesClient:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        HttpValidationError,
+                        typing.Optional[typing.Any],
                         parse_obj_as(
-                            type_=HttpValidationError,  # type: ignore
+                            type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

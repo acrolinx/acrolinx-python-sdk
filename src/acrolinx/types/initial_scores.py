@@ -13,6 +13,7 @@ class InitialScores(UniversalBaseModel):
     acrolinx_score: typing.Optional[AcrolinxScorerActivityOutput] = None
     content_score: typing.Optional[ContentScorerActivityOutput] = None
     issue_score: typing.Optional[IssueScores] = None
+    quality_score: typing.Optional[int] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

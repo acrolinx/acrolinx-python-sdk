@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class TerminologyScore(UniversalBaseModel):
-    score: typing.Optional[float] = None
+    score: typing.Optional[int] = None
     issues: typing.Optional[int] = None
 
     if IS_PYDANTIC_V2:

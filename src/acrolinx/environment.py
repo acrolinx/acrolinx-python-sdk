@@ -3,5 +3,5 @@
 import enum
 
 
-class acrolinxEnvironment(enum.Enum):
-    DEFAULT = "https://app.acrolinx.cloud"
+class AcrolinxEnvironment(enum.Enum):
+    PRODUCTION = "https://app.acrolinx.cloud"

@@ -4,13 +4,18 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .validation_error_loc_item import ValidationErrorLocItem
 
 
-class ValidationError(UniversalBaseModel):
-    loc: typing.List[ValidationErrorLocItem]
-    msg: str
-    type: str
+class Rfc9457Error(UniversalBaseModel):
+    """
+    Base model for RFC 9457 errors.
+    """
+
+    type: typing.Optional[str] = None
+    title: typing.Optional[str] = None
+    status: typing.Optional[int] = None
+    detail: typing.Optional[str] = None
+    instance: typing.Optional[str] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

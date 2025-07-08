@@ -6,8 +6,14 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class QualityScore(UniversalBaseModel):
-    score: typing.Optional[int] = None
+class ErrorDetail(UniversalBaseModel):
+    """
+    Error detail model for consistent error responses.
+    """
+
+    code: str
+    message: str
+    description: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

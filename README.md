@@ -1,14 +1,14 @@
 # Acrolinx Python Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Facrolinx%2Facrolinx-python-sdk)
-[![pypi](https://img.shields.io/pypi/v/acrolinx)](https://pypi.python.org/pypi/acrolinx)
+[![pypi](https://img.shields.io/pypi/v/acrolinx-nextgen-api)](https://pypi.python.org/pypi/acrolinx-nextgen-api)
 
 The Acrolinx Python library provides convenient access to the Acrolinx API from Python.
 
 ## Installation
 
 ```sh
-pip install acrolinx
+pip install acrolinx-nextgen-api
 ```
 
 ## Reference
@@ -20,9 +20,9 @@ A full reference for this library is available [here](https://github.com/acrolin
 Instantiate and use the client with the following:
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     token="YOUR_TOKEN",
 )
 client.style_guides.create_style_guide()
@@ -35,9 +35,9 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 ```python
 import asyncio
 
-from acrolinx import Asyncacrolinx
+from acrolinx import AsyncAcrolinx
 
-client = Asyncacrolinx(
+client = AsyncAcrolinx(
     token="YOUR_TOKEN",
 )
 
@@ -72,9 +72,9 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.with_raw_response` property returns a "raw" client that can be used to access the `.headers` and `.data` attributes.
 
 ```python
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     ...,
 )
 response = client.style_guides.with_raw_response.create_style_guide(...)
@@ -108,9 +108,9 @@ The SDK defaults to a 60 second timeout. You can configure this with a timeout o
 
 ```python
 
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     ...,
     timeout=20.0,
 )
@@ -129,9 +129,9 @@ and transports.
 
 ```python
 import httpx
-from acrolinx import acrolinx
+from acrolinx import Acrolinx
 
-client = acrolinx(
+client = Acrolinx(
     ...,
     httpx_client=httpx.Client(
         proxies="http://my.test.proxy.example.com",

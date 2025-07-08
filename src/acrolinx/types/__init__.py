@@ -10,13 +10,14 @@ from .content_quality_feedback import ContentQualityFeedback
 from .content_scorer_activity_output import ContentScorerActivityOutput
 from .content_suggestions import ContentSuggestions
 from .dialects import Dialects
+from .error_detail import ErrorDetail
+from .error_response import ErrorResponse
 from .final_scores import FinalScores
 from .grammar_activity_output import GrammarActivityOutput
 from .grammar_category import GrammarCategory
 from .grammar_change import GrammarChange
 from .grammar_score import GrammarScore
 from .helios_one_workflow_output import HeliosOneWorkflowOutput
-from .http_validation_error import HttpValidationError
 from .initial_scores import InitialScores
 from .issue import Issue
 from .issue_category import IssueCategory
@@ -26,6 +27,7 @@ from .parameters import Parameters
 from .parser_response import ParserResponse
 from .quality_score import QualityScore
 from .rewrite_response import RewriteResponse
+from .rfc9457error import Rfc9457Error
 from .score_output import ScoreOutput
 from .sentence_length_activity_output import SentenceLengthActivityOutput
 from .sentence_length_category import SentenceLengthCategory
@@ -45,7 +47,6 @@ from .style_guide_response import StyleGuideResponse
 from .style_guide_score import StyleGuideScore
 from .style_guide_status import StyleGuideStatus
 from .style_guides import StyleGuides
-from .style_request_body import StyleRequestBody
 from .subcategory import Subcategory
 from .suggestion import Suggestion
 from .suggestion_response import SuggestionResponse
@@ -59,8 +60,6 @@ from .tone_change import ToneChange
 from .tone_check_output import ToneCheckOutput
 from .tone_score import ToneScore
 from .tones import Tones
-from .validation_error import ValidationError
-from .validation_error_loc_item import ValidationErrorLocItem
 from .workflow_error import WorkflowError
 from .workflow_response import WorkflowResponse
 from .workflow_status import WorkflowStatus
@@ -75,13 +74,14 @@ __all__ = [
     "ContentScorerActivityOutput",
     "ContentSuggestions",
     "Dialects",
+    "ErrorDetail",
+    "ErrorResponse",
     "FinalScores",
     "GrammarActivityOutput",
     "GrammarCategory",
     "GrammarChange",
     "GrammarScore",
     "HeliosOneWorkflowOutput",
-    "HttpValidationError",
     "InitialScores",
     "Issue",
     "IssueCategory",
@@ -91,6 +91,7 @@ __all__ = [
     "ParserResponse",
     "QualityScore",
     "RewriteResponse",
+    "Rfc9457Error",
     "ScoreOutput",
     "SentenceLengthActivityOutput",
     "SentenceLengthCategory",
@@ -110,7 +111,6 @@ __all__ = [
     "StyleGuideScore",
     "StyleGuideStatus",
     "StyleGuides",
-    "StyleRequestBody",
     "Subcategory",
     "Suggestion",
     "SuggestionResponse",
@@ -124,8 +124,6 @@ __all__ = [
     "ToneCheckOutput",
     "ToneScore",
     "Tones",
-    "ValidationError",
-    "ValidationErrorLocItem",
     "WorkflowError",
     "WorkflowResponse",
     "WorkflowStatus",

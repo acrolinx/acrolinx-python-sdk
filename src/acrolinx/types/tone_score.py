@@ -7,9 +7,13 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class ToneScore(UniversalBaseModel):
-    score: typing.Optional[float] = None
+    score: typing.Optional[int] = None
     informality: typing.Optional[float] = None
     liveliness: typing.Optional[float] = None
+    target_informality: typing.Optional[float] = None
+    target_liveliness: typing.Optional[float] = None
+    informality_tolerance: typing.Optional[float] = None
+    liveliness_tolerance: typing.Optional[float] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
