@@ -11,7 +11,7 @@ class ClarityScore(UniversalBaseModel):
     flesch_kincaid_grade: typing.Optional[float] = None
     flesch_reading_ease: typing.Optional[float] = None
     lexical_diversity: typing.Optional[float] = None
-    score: typing.Optional[float] = None
+    score: typing.Optional[int] = None
     sentence_complexity: typing.Optional[float] = None
     sentence_count: typing.Optional[int] = None
     vocabulary_complexity: typing.Optional[float] = None

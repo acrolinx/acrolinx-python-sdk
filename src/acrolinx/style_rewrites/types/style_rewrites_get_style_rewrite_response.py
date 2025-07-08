@@ -3,6 +3,10 @@
 import typing
 
 from ...types.rewrite_response import RewriteResponse
+from ...types.rfc9457error import Rfc9457Error
+from ...types.style_check_response import StyleCheckResponse
 from ...types.workflow_status_response import WorkflowStatusResponse
 
-StyleRewritesGetStyleRewriteResponse = typing.Union[RewriteResponse, WorkflowStatusResponse]
+StyleRewritesGetStyleRewriteResponse = typing.Union[
+    RewriteResponse, WorkflowStatusResponse, StyleCheckResponse, Rfc9457Error
+]

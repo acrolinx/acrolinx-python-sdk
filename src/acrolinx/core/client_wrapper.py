@@ -22,9 +22,10 @@ class BaseClientWrapper:
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
+            "User-Agent": "acrolinx-nextgen-api/0.0.0-beta.0",
             "X-Fern-Language": "Python",
-            "X-Fern-SDK-Name": "acrolinx",
-            "X-Fern-SDK-Version": "0.0.0",
+            "X-Fern-SDK-Name": "acrolinx-nextgen-api",
+            "X-Fern-SDK-Version": "0.0.0-beta.0",
             **(self.get_custom_headers() or {}),
         }
         headers["Authorization"] = f"Bearer {self._get_token()}"

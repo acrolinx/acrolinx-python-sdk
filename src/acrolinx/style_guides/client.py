@@ -53,9 +53,9 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_guides.get_style_guides()
@@ -77,7 +77,7 @@ class StyleGuidesClient:
             See core.File for more documentation
 
         name : typing.Optional[str]
-            The name of the style guide.
+            A friendly name for your style guide to help you identify it later. If left empty, we'll generate one for you.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -85,13 +85,13 @@ class StyleGuidesClient:
         Returns
         -------
         StyleGuideResponse
-            Successful Response
+            The style guide was created successfully and is being processed.
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_guides.create_style_guide()
@@ -120,9 +120,9 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_guides.get_style_guide(
@@ -150,9 +150,9 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_guides.delete_style_guide(
@@ -188,9 +188,9 @@ class StyleGuidesClient:
 
         Examples
         --------
-        from acrolinx import acrolinx
+        from acrolinx import Acrolinx
 
-        client = acrolinx(
+        client = Acrolinx(
             token="YOUR_TOKEN",
         )
         client.style_guides.update_style_guide(
@@ -244,9 +244,9 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 
@@ -274,7 +274,7 @@ class AsyncStyleGuidesClient:
             See core.File for more documentation
 
         name : typing.Optional[str]
-            The name of the style guide.
+            A friendly name for your style guide to help you identify it later. If left empty, we'll generate one for you.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -282,15 +282,15 @@ class AsyncStyleGuidesClient:
         Returns
         -------
         StyleGuideResponse
-            Successful Response
+            The style guide was created successfully and is being processed.
 
         Examples
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 
@@ -327,9 +327,9 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 
@@ -365,9 +365,9 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 
@@ -411,9 +411,9 @@ class AsyncStyleGuidesClient:
         --------
         import asyncio
 
-        from acrolinx import Asyncacrolinx
+        from acrolinx import AsyncAcrolinx
 
-        client = Asyncacrolinx(
+        client = AsyncAcrolinx(
             token="YOUR_TOKEN",
         )
 

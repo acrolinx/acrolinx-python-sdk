@@ -2,7 +2,8 @@
 
 import typing
 
+from ...types.rfc9457error import Rfc9457Error
 from ...types.style_check_response import StyleCheckResponse
 from ...types.workflow_status_response import WorkflowStatusResponse
 
-StyleChecksGetStyleCheckResponse = typing.Union[StyleCheckResponse, WorkflowStatusResponse]
+StyleChecksGetStyleCheckResponse = typing.Union[WorkflowStatusResponse, StyleCheckResponse, Rfc9457Error]

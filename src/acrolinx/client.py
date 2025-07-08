@@ -4,14 +4,14 @@ import typing
 
 import httpx
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from .environment import acrolinxEnvironment
+from .environment import AcrolinxEnvironment
 from .style_checks.client import AsyncStyleChecksClient, StyleChecksClient
 from .style_guides.client import AsyncStyleGuidesClient, StyleGuidesClient
 from .style_rewrites.client import AsyncStyleRewritesClient, StyleRewritesClient
 from .style_suggestions.client import AsyncStyleSuggestionsClient, StyleSuggestionsClient
 
 
-class acrolinx:
+class Acrolinx:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -20,12 +20,12 @@ class acrolinx:
     base_url : typing.Optional[str]
         The base url to use for requests from the client.
 
-    environment : acrolinxEnvironment
-        The environment to use for requests from the client. from .environment import acrolinxEnvironment
+    environment : AcrolinxEnvironment
+        The environment to use for requests from the client. from .environment import AcrolinxEnvironment
 
 
 
-        Defaults to acrolinxEnvironment.DEFAULT
+        Defaults to AcrolinxEnvironment.PRODUCTION
 
 
 
@@ -44,9 +44,9 @@ class acrolinx:
 
     Examples
     --------
-    from acrolinx import acrolinx
+    from acrolinx import Acrolinx
 
-    client = acrolinx(
+    client = Acrolinx(
         token="YOUR_TOKEN",
     )
     """
@@ -55,7 +55,7 @@ class acrolinx:
         self,
         *,
         base_url: typing.Optional[str] = None,
-        environment: acrolinxEnvironment = acrolinxEnvironment.DEFAULT,
+        environment: AcrolinxEnvironment = AcrolinxEnvironment.PRODUCTION,
         token: typing.Union[str, typing.Callable[[], str]],
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
@@ -82,7 +82,7 @@ class acrolinx:
         self.style_rewrites = StyleRewritesClient(client_wrapper=self._client_wrapper)
 
 
-class Asyncacrolinx:
+class AsyncAcrolinx:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -91,12 +91,12 @@ class Asyncacrolinx:
     base_url : typing.Optional[str]
         The base url to use for requests from the client.
 
-    environment : acrolinxEnvironment
-        The environment to use for requests from the client. from .environment import acrolinxEnvironment
+    environment : AcrolinxEnvironment
+        The environment to use for requests from the client. from .environment import AcrolinxEnvironment
 
 
 
-        Defaults to acrolinxEnvironment.DEFAULT
+        Defaults to AcrolinxEnvironment.PRODUCTION
 
 
 
@@ -115,9 +115,9 @@ class Asyncacrolinx:
 
     Examples
     --------
-    from acrolinx import Asyncacrolinx
+    from acrolinx import AsyncAcrolinx
 
-    client = Asyncacrolinx(
+    client = AsyncAcrolinx(
         token="YOUR_TOKEN",
     )
     """
@@ -126,7 +126,7 @@ class Asyncacrolinx:
         self,
         *,
         base_url: typing.Optional[str] = None,
-        environment: acrolinxEnvironment = acrolinxEnvironment.DEFAULT,
+        environment: AcrolinxEnvironment = AcrolinxEnvironment.PRODUCTION,
         token: typing.Union[str, typing.Callable[[], str]],
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
@@ -153,7 +153,7 @@ class Asyncacrolinx:
         self.style_rewrites = AsyncStyleRewritesClient(client_wrapper=self._client_wrapper)
 
 
-def _get_base_url(*, base_url: typing.Optional[str] = None, environment: acrolinxEnvironment) -> str:
+def _get_base_url(*, base_url: typing.Optional[str] = None, environment: AcrolinxEnvironment) -> str:
     if base_url is not None:
         return base_url
     elif environment is not None:

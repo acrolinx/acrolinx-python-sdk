@@ -20,6 +20,10 @@ class Analysis(UniversalBaseModel):
     tone_score: typing.Optional[float] = None
     informality_score: typing.Optional[float] = None
     liveliness_score: typing.Optional[float] = None
+    target_informality: typing.Optional[float] = None
+    target_liveliness: typing.Optional[float] = None
+    informality_tolerance: typing.Optional[float] = None
+    liveliness_tolerance: typing.Optional[float] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

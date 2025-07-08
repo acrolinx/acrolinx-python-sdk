@@ -18,12 +18,22 @@ class ToneChange(UniversalBaseModel):
     The modified text
     """
 
-    change_start_char_idx: int = pydantic.Field()
+    change_start_char_idx: typing.Optional[int] = pydantic.Field(default=None)
     """
-    The start index of the change
+    The start index of the change (calculated from context)
     """
 
     change_type: typing.Optional[typing.Literal["tone"]] = None
+    context_before: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Text that appears before the original text
+    """
+
+    context_after: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Text that appears after the original text
+    """
+
     category: ToneCategory = pydantic.Field()
     """
     The category of the change

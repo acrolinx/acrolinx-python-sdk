@@ -17,12 +17,12 @@ class StyleGuideResponse(UniversalBaseModel):
 
     created_at: dt.datetime = pydantic.Field()
     """
-    The date and time the style guide was created.
+    The UTC date and time the style guide was created.
     """
 
     created_by: str = pydantic.Field()
     """
-    The email of the user who created the style guide.
+    The user who created the style guide.
     """
 
     status: StyleGuideStatus = pydantic.Field()
@@ -32,12 +32,12 @@ class StyleGuideResponse(UniversalBaseModel):
 
     updated_at: typing.Optional[dt.datetime] = pydantic.Field(default=None)
     """
-    The date and time the style guide was last updated. If null, the style guide has never been updated.
+    The UTC datetime that the style guide was last updated. If null, the style guide has never been updated.
     """
 
     updated_by: typing.Optional[str] = pydantic.Field(default=None)
     """
-    The email of the user who last updated the style guide. If null, the style guide has never been updated.
+    The user who last updated the style guide. If null, the style guide has never been updated.
     """
 
     if IS_PYDANTIC_V2:
