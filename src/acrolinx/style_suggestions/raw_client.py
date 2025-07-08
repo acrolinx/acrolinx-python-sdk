@@ -31,26 +31,26 @@ class RawStyleSuggestionsClient:
         self,
         *,
         file_upload: core.File,
-        dialect: typing.Optional[Dialects] = OMIT,
-        tone: typing.Optional[Tones] = OMIT,
-        style_guide: typing.Optional[str] = OMIT,
+        dialect: Dialects,
+        tone: Tones,
+        style_guide: str,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[WorkflowResponse]:
         """
-        Start a style and brand suggestion run. Returns a workflow ID for each file.
+        Start a style and brand suggestion workflow. Returns a workflow ID to use for polling results.
 
         Parameters
         ----------
         file_upload : core.File
             See core.File for more documentation
 
-        dialect : typing.Optional[Dialects]
+        dialect : Dialects
             The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
 
-        tone : typing.Optional[Tones]
+        tone : Tones
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
-        style_guide : typing.Optional[str]
+        style_guide : str
             The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
 
         request_options : typing.Optional[RequestOptions]
@@ -117,7 +117,7 @@ class RawStyleSuggestionsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StyleSuggestionsGetStyleSuggestionResponse]:
         """
-        Get the results of a suggestion run.
+        Retrieve the results of a style and brand suggestion workflow. Returns `running` or `complete` status.
 
         Parameters
         ----------
@@ -182,26 +182,26 @@ class AsyncRawStyleSuggestionsClient:
         self,
         *,
         file_upload: core.File,
-        dialect: typing.Optional[Dialects] = OMIT,
-        tone: typing.Optional[Tones] = OMIT,
-        style_guide: typing.Optional[str] = OMIT,
+        dialect: Dialects,
+        tone: Tones,
+        style_guide: str,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[WorkflowResponse]:
         """
-        Start a style and brand suggestion run. Returns a workflow ID for each file.
+        Start a style and brand suggestion workflow. Returns a workflow ID to use for polling results.
 
         Parameters
         ----------
         file_upload : core.File
             See core.File for more documentation
 
-        dialect : typing.Optional[Dialects]
+        dialect : Dialects
             The language variant you'd like us to use for analysis. Choose from American English, British English, or other supported dialects.
 
-        tone : typing.Optional[Tones]
+        tone : Tones
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
-        style_guide : typing.Optional[str]
+        style_guide : str
             The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
 
         request_options : typing.Optional[RequestOptions]
@@ -268,7 +268,7 @@ class AsyncRawStyleSuggestionsClient:
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StyleSuggestionsGetStyleSuggestionResponse]:
         """
-        Get the results of a suggestion run.
+        Retrieve the results of a style and brand suggestion workflow. Returns `running` or `complete` status.
 
         Parameters
         ----------

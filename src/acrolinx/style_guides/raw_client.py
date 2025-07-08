@@ -23,7 +23,7 @@ class RawStyleGuidesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get_style_guides(
+    def list_style_guides(
         self,
         *,
         offset: typing.Optional[int] = None,
@@ -31,7 +31,7 @@ class RawStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.List[StyleGuideResponse]]:
         """
-        Get all style guides.
+        Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
@@ -90,6 +90,8 @@ class RawStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[StyleGuideResponse]:
         """
+        Create a new style guide that can be used in checks, suggestions, and rewrites.
+
         Parameters
         ----------
         file_upload : core.File
@@ -156,10 +158,12 @@ class RawStyleGuidesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_style_guide(
+    def get_style_guide_by_id(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StyleGuideResponse]:
         """
+        Retrieve a specific style guide by ID, including its metadata such as `name` and `status`.
+
         Parameters
         ----------
         style_guide_id : str
@@ -208,6 +212,8 @@ class RawStyleGuidesClient:
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[None]:
         """
+        Delete a style guide by ID.
+
         Parameters
         ----------
         style_guide_id : str
@@ -252,6 +258,8 @@ class RawStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[StyleGuideResponse]:
         """
+        Update the name of an existing style guide.
+
         Parameters
         ----------
         style_guide_id : str
@@ -311,7 +319,7 @@ class AsyncRawStyleGuidesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get_style_guides(
+    async def list_style_guides(
         self,
         *,
         offset: typing.Optional[int] = None,
@@ -319,7 +327,7 @@ class AsyncRawStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.List[StyleGuideResponse]]:
         """
-        Get all style guides.
+        Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
@@ -378,6 +386,8 @@ class AsyncRawStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[StyleGuideResponse]:
         """
+        Create a new style guide that can be used in checks, suggestions, and rewrites.
+
         Parameters
         ----------
         file_upload : core.File
@@ -444,10 +454,12 @@ class AsyncRawStyleGuidesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_style_guide(
+    async def get_style_guide_by_id(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StyleGuideResponse]:
         """
+        Retrieve a specific style guide by ID, including its metadata such as `name` and `status`.
+
         Parameters
         ----------
         style_guide_id : str
@@ -496,6 +508,8 @@ class AsyncRawStyleGuidesClient:
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[None]:
         """
+        Delete a style guide by ID.
+
         Parameters
         ----------
         style_guide_id : str
@@ -540,6 +554,8 @@ class AsyncRawStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[StyleGuideResponse]:
         """
+        Update the name of an existing style guide.
+
         Parameters
         ----------
         style_guide_id : str

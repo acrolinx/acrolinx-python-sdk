@@ -27,7 +27,7 @@ class StyleGuidesClient:
         """
         return self._raw_client
 
-    def get_style_guides(
+    def list_style_guides(
         self,
         *,
         offset: typing.Optional[int] = None,
@@ -35,7 +35,7 @@ class StyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[StyleGuideResponse]:
         """
-        Get all style guides.
+        Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
@@ -58,9 +58,9 @@ class StyleGuidesClient:
         client = Acrolinx(
             token="YOUR_TOKEN",
         )
-        client.style_guides.get_style_guides()
+        client.style_guides.list_style_guides()
         """
-        _response = self._raw_client.get_style_guides(offset=offset, limit=limit, request_options=request_options)
+        _response = self._raw_client.list_style_guides(offset=offset, limit=limit, request_options=request_options)
         return _response.data
 
     def create_style_guide(
@@ -71,6 +71,8 @@ class StyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StyleGuideResponse:
         """
+        Create a new style guide that can be used in checks, suggestions, and rewrites.
+
         Parameters
         ----------
         file_upload : core.File
@@ -101,10 +103,12 @@ class StyleGuidesClient:
         )
         return _response.data
 
-    def get_style_guide(
+    def get_style_guide_by_id(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StyleGuideResponse:
         """
+        Retrieve a specific style guide by ID, including its metadata such as `name` and `status`.
+
         Parameters
         ----------
         style_guide_id : str
@@ -125,17 +129,19 @@ class StyleGuidesClient:
         client = Acrolinx(
             token="YOUR_TOKEN",
         )
-        client.style_guides.get_style_guide(
+        client.style_guides.get_style_guide_by_id(
             style_guide_id="style_guide_id",
         )
         """
-        _response = self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
+        _response = self._raw_client.get_style_guide_by_id(style_guide_id, request_options=request_options)
         return _response.data
 
     def delete_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Delete a style guide by ID.
+
         Parameters
         ----------
         style_guide_id : str
@@ -170,6 +176,8 @@ class StyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StyleGuideResponse:
         """
+        Update the name of an existing style guide.
+
         Parameters
         ----------
         style_guide_id : str
@@ -216,7 +224,7 @@ class AsyncStyleGuidesClient:
         """
         return self._raw_client
 
-    async def get_style_guides(
+    async def list_style_guides(
         self,
         *,
         offset: typing.Optional[int] = None,
@@ -224,7 +232,7 @@ class AsyncStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[StyleGuideResponse]:
         """
-        Get all style guides.
+        Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
@@ -252,12 +260,14 @@ class AsyncStyleGuidesClient:
 
 
         async def main() -> None:
-            await client.style_guides.get_style_guides()
+            await client.style_guides.list_style_guides()
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_guides(offset=offset, limit=limit, request_options=request_options)
+        _response = await self._raw_client.list_style_guides(
+            offset=offset, limit=limit, request_options=request_options
+        )
         return _response.data
 
     async def create_style_guide(
@@ -268,6 +278,8 @@ class AsyncStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StyleGuideResponse:
         """
+        Create a new style guide that can be used in checks, suggestions, and rewrites.
+
         Parameters
         ----------
         file_upload : core.File
@@ -306,10 +318,12 @@ class AsyncStyleGuidesClient:
         )
         return _response.data
 
-    async def get_style_guide(
+    async def get_style_guide_by_id(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StyleGuideResponse:
         """
+        Retrieve a specific style guide by ID, including its metadata such as `name` and `status`.
+
         Parameters
         ----------
         style_guide_id : str
@@ -335,20 +349,22 @@ class AsyncStyleGuidesClient:
 
 
         async def main() -> None:
-            await client.style_guides.get_style_guide(
+            await client.style_guides.get_style_guide_by_id(
                 style_guide_id="style_guide_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
+        _response = await self._raw_client.get_style_guide_by_id(style_guide_id, request_options=request_options)
         return _response.data
 
     async def delete_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
+        Delete a style guide by ID.
+
         Parameters
         ----------
         style_guide_id : str
@@ -391,6 +407,8 @@ class AsyncStyleGuidesClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> StyleGuideResponse:
         """
+        Update the name of an existing style guide.
+
         Parameters
         ----------
         style_guide_id : str
