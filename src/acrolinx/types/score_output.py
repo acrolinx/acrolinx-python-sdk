@@ -13,12 +13,12 @@ from .tone_score import ToneScore
 
 
 class ScoreOutput(UniversalBaseModel):
-    quality: QualityScore
-    clarity: ClarityScore
-    grammar: GrammarScore
-    style_guide: StyleGuideScore
-    tone: ToneScore
-    terminology: TerminologyScore
+    quality: typing.Optional[QualityScore] = None
+    clarity: typing.Optional[ClarityScore] = None
+    grammar: typing.Optional[GrammarScore] = None
+    style_guide: typing.Optional[StyleGuideScore] = None
+    tone: typing.Optional[ToneScore] = None
+    terminology: typing.Optional[TerminologyScore] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

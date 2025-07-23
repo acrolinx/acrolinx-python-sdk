@@ -3,6 +3,5 @@
 import typing
 
 Tones = typing.Union[
-    typing.Literal["academic", "business", "casual", "conversational", "formal", "gen-z", "informal", "technical"],
-    typing.Any,
+    typing.Literal["academic", "business", "conversational", "formal", "informal", "technical"], typing.Any
 ]

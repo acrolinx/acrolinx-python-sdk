@@ -10,14 +10,15 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..errors.content_too_large_error import ContentTooLargeError
 from ..errors.internal_server_error import InternalServerError
 from ..errors.not_found_error import NotFoundError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.dialects import Dialects
 from ..types.error_response import ErrorResponse
+from ..types.style_check_response import StyleCheckResponse
 from ..types.tones import Tones
 from ..types.workflow_response import WorkflowResponse
-from .types.style_checks_get_style_check_response import StyleChecksGetStyleCheckResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -51,7 +52,7 @@ class RawStyleChecksClient:
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : str
-            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+            The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -86,6 +87,17 @@ class RawStyleChecksClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 413:
+                raise ContentTooLargeError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -115,7 +127,7 @@ class RawStyleChecksClient:
 
     def get_style_check(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[StyleChecksGetStyleCheckResponse]:
+    ) -> HttpResponse[StyleCheckResponse]:
         """
         Retrieve the results of a style and brand check workflow. Returns `running` or `complete` status.
 
@@ -128,7 +140,7 @@ class RawStyleChecksClient:
 
         Returns
         -------
-        HttpResponse[StyleChecksGetStyleCheckResponse]
+        HttpResponse[StyleCheckResponse]
             The style and brand check run results.
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -139,9 +151,9 @@ class RawStyleChecksClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    StyleChecksGetStyleCheckResponse,
+                    StyleCheckResponse,
                     parse_obj_as(
-                        type_=StyleChecksGetStyleCheckResponse,  # type: ignore
+                        type_=StyleCheckResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -164,6 +176,17 @@ class RawStyleChecksClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -202,7 +225,7 @@ class AsyncRawStyleChecksClient:
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : str
-            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+            The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -237,6 +260,17 @@ class AsyncRawStyleChecksClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 413:
+                raise ContentTooLargeError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Optional[typing.Any],
+                        parse_obj_as(
+                            type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -266,7 +300,7 @@ class AsyncRawStyleChecksClient:
 
     async def get_style_check(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[StyleChecksGetStyleCheckResponse]:
+    ) -> AsyncHttpResponse[StyleCheckResponse]:
         """
         Retrieve the results of a style and brand check workflow. Returns `running` or `complete` status.
 
@@ -279,7 +313,7 @@ class AsyncRawStyleChecksClient:
 
         Returns
         -------
-        AsyncHttpResponse[StyleChecksGetStyleCheckResponse]
+        AsyncHttpResponse[StyleCheckResponse]
             The style and brand check run results.
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -290,9 +324,9 @@ class AsyncRawStyleChecksClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    StyleChecksGetStyleCheckResponse,
+                    StyleCheckResponse,
                     parse_obj_as(
-                        type_=StyleChecksGetStyleCheckResponse,  # type: ignore
+                        type_=StyleCheckResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -315,6 +349,17 @@ class AsyncRawStyleChecksClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

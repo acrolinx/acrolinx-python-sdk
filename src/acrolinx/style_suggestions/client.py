@@ -6,10 +6,10 @@ from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.dialects import Dialects
+from ..types.suggestion_response import SuggestionResponse
 from ..types.tones import Tones
 from ..types.workflow_response import WorkflowResponse
 from .raw_client import AsyncRawStyleSuggestionsClient, RawStyleSuggestionsClient
-from .types.style_suggestions_get_style_suggestion_response import StyleSuggestionsGetStyleSuggestionResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -54,7 +54,7 @@ class StyleSuggestionsClient:
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : str
-            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+            The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -62,7 +62,7 @@ class StyleSuggestionsClient:
         Returns
         -------
         WorkflowResponse
-            Suggestion run started successfully.
+            Check run started successfully.
 
         Examples
         --------
@@ -88,7 +88,7 @@ class StyleSuggestionsClient:
 
     def get_style_suggestion(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> StyleSuggestionsGetStyleSuggestionResponse:
+    ) -> SuggestionResponse:
         """
         Retrieve the results of a style and brand suggestion workflow. Returns `running` or `complete` status.
 
@@ -101,7 +101,7 @@ class StyleSuggestionsClient:
 
         Returns
         -------
-        StyleSuggestionsGetStyleSuggestionResponse
+        SuggestionResponse
             The suggestion run results.
 
         Examples
@@ -158,7 +158,7 @@ class AsyncStyleSuggestionsClient:
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : str
-            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+            The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -166,7 +166,7 @@ class AsyncStyleSuggestionsClient:
         Returns
         -------
         WorkflowResponse
-            Suggestion run started successfully.
+            Check run started successfully.
 
         Examples
         --------
@@ -200,7 +200,7 @@ class AsyncStyleSuggestionsClient:
 
     async def get_style_suggestion(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> StyleSuggestionsGetStyleSuggestionResponse:
+    ) -> SuggestionResponse:
         """
         Retrieve the results of a style and brand suggestion workflow. Returns `running` or `complete` status.
 
@@ -213,7 +213,7 @@ class AsyncStyleSuggestionsClient:
 
         Returns
         -------
-        StyleSuggestionsGetStyleSuggestionResponse
+        SuggestionResponse
             The suggestion run results.
 
         Examples

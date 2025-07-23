@@ -10,6 +10,7 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
+from ..errors.forbidden_error import ForbiddenError
 from ..errors.internal_server_error import InternalServerError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.error_response import ErrorResponse
@@ -24,21 +25,13 @@ class RawStyleGuidesClient:
         self._client_wrapper = client_wrapper
 
     def list_style_guides(
-        self,
-        *,
-        offset: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[typing.List[StyleGuideResponse]]:
         """
         Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
-        offset : typing.Optional[int]
-
-        limit : typing.Optional[int]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -50,10 +43,6 @@ class RawStyleGuidesClient:
         _response = self._client_wrapper.httpx_client.request(
             "v1/style-guides",
             method="GET",
-            params={
-                "offset": offset,
-                "limit": limit,
-            },
             request_options=request_options,
         )
         try:
@@ -73,6 +62,17 @@ class RawStyleGuidesClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -106,7 +106,7 @@ class RawStyleGuidesClient:
         Returns
         -------
         HttpResponse[StyleGuideResponse]
-            The style guide was created successfully and is being processed.
+            Successful Response
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/style-guides",
@@ -158,7 +158,7 @@ class RawStyleGuidesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_style_guide_by_id(
+    def get_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StyleGuideResponse]:
         """
@@ -199,6 +199,17 @@ class RawStyleGuidesClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -245,17 +256,24 @@ class RawStyleGuidesClient:
                         ),
                     ),
                 )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_style_guide(
-        self,
-        style_guide_id: str,
-        *,
-        name: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, style_guide_id: str, *, name: str, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[StyleGuideResponse]:
         """
         Update the name of an existing style guide.
@@ -265,7 +283,7 @@ class RawStyleGuidesClient:
         style_guide_id : str
             The ID of the style guide.
 
-        name : typing.Optional[str]
+        name : str
             The name of the style guide.
 
         request_options : typing.Optional[RequestOptions]
@@ -298,6 +316,17 @@ class RawStyleGuidesClient:
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -305,6 +334,17 @@ class RawStyleGuidesClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -320,21 +360,13 @@ class AsyncRawStyleGuidesClient:
         self._client_wrapper = client_wrapper
 
     async def list_style_guides(
-        self,
-        *,
-        offset: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[typing.List[StyleGuideResponse]]:
         """
         Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
-        offset : typing.Optional[int]
-
-        limit : typing.Optional[int]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -346,10 +378,6 @@ class AsyncRawStyleGuidesClient:
         _response = await self._client_wrapper.httpx_client.request(
             "v1/style-guides",
             method="GET",
-            params={
-                "offset": offset,
-                "limit": limit,
-            },
             request_options=request_options,
         )
         try:
@@ -369,6 +397,17 @@ class AsyncRawStyleGuidesClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -402,7 +441,7 @@ class AsyncRawStyleGuidesClient:
         Returns
         -------
         AsyncHttpResponse[StyleGuideResponse]
-            The style guide was created successfully and is being processed.
+            Successful Response
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/style-guides",
@@ -454,7 +493,7 @@ class AsyncRawStyleGuidesClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_style_guide_by_id(
+    async def get_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StyleGuideResponse]:
         """
@@ -495,6 +534,17 @@ class AsyncRawStyleGuidesClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -541,17 +591,24 @@ class AsyncRawStyleGuidesClient:
                         ),
                     ),
                 )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_style_guide(
-        self,
-        style_guide_id: str,
-        *,
-        name: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, style_guide_id: str, *, name: str, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[StyleGuideResponse]:
         """
         Update the name of an existing style guide.
@@ -561,7 +618,7 @@ class AsyncRawStyleGuidesClient:
         style_guide_id : str
             The ID of the style guide.
 
-        name : typing.Optional[str]
+        name : str
             The name of the style guide.
 
         request_options : typing.Optional[RequestOptions]
@@ -594,6 +651,17 @@ class AsyncRawStyleGuidesClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -601,6 +669,17 @@ class AsyncRawStyleGuidesClient:
                         typing.Optional[typing.Any],
                         parse_obj_as(
                             type_=typing.Optional[typing.Any],  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

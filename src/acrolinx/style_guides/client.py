@@ -28,21 +28,13 @@ class StyleGuidesClient:
         return self._raw_client
 
     def list_style_guides(
-        self,
-        *,
-        offset: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[StyleGuideResponse]:
         """
         Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
-        offset : typing.Optional[int]
-
-        limit : typing.Optional[int]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -60,7 +52,7 @@ class StyleGuidesClient:
         )
         client.style_guides.list_style_guides()
         """
-        _response = self._raw_client.list_style_guides(offset=offset, limit=limit, request_options=request_options)
+        _response = self._raw_client.list_style_guides(request_options=request_options)
         return _response.data
 
     def create_style_guide(
@@ -87,7 +79,7 @@ class StyleGuidesClient:
         Returns
         -------
         StyleGuideResponse
-            The style guide was created successfully and is being processed.
+            Successful Response
 
         Examples
         --------
@@ -103,7 +95,7 @@ class StyleGuidesClient:
         )
         return _response.data
 
-    def get_style_guide_by_id(
+    def get_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StyleGuideResponse:
         """
@@ -129,11 +121,11 @@ class StyleGuidesClient:
         client = Acrolinx(
             token="YOUR_TOKEN",
         )
-        client.style_guides.get_style_guide_by_id(
+        client.style_guides.get_style_guide(
             style_guide_id="style_guide_id",
         )
         """
-        _response = self._raw_client.get_style_guide_by_id(style_guide_id, request_options=request_options)
+        _response = self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
         return _response.data
 
     def delete_style_guide(
@@ -169,11 +161,7 @@ class StyleGuidesClient:
         return _response.data
 
     def update_style_guide(
-        self,
-        style_guide_id: str,
-        *,
-        name: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, style_guide_id: str, *, name: str, request_options: typing.Optional[RequestOptions] = None
     ) -> StyleGuideResponse:
         """
         Update the name of an existing style guide.
@@ -183,7 +171,7 @@ class StyleGuidesClient:
         style_guide_id : str
             The ID of the style guide.
 
-        name : typing.Optional[str]
+        name : str
             The name of the style guide.
 
         request_options : typing.Optional[RequestOptions]
@@ -203,6 +191,7 @@ class StyleGuidesClient:
         )
         client.style_guides.update_style_guide(
             style_guide_id="style_guide_id",
+            name="name",
         )
         """
         _response = self._raw_client.update_style_guide(style_guide_id, name=name, request_options=request_options)
@@ -225,21 +214,13 @@ class AsyncStyleGuidesClient:
         return self._raw_client
 
     async def list_style_guides(
-        self,
-        *,
-        offset: typing.Optional[int] = None,
-        limit: typing.Optional[int] = None,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[StyleGuideResponse]:
         """
         Retrieve all style guides associated with your organization.
 
         Parameters
         ----------
-        offset : typing.Optional[int]
-
-        limit : typing.Optional[int]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -265,9 +246,7 @@ class AsyncStyleGuidesClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list_style_guides(
-            offset=offset, limit=limit, request_options=request_options
-        )
+        _response = await self._raw_client.list_style_guides(request_options=request_options)
         return _response.data
 
     async def create_style_guide(
@@ -294,7 +273,7 @@ class AsyncStyleGuidesClient:
         Returns
         -------
         StyleGuideResponse
-            The style guide was created successfully and is being processed.
+            Successful Response
 
         Examples
         --------
@@ -318,7 +297,7 @@ class AsyncStyleGuidesClient:
         )
         return _response.data
 
-    async def get_style_guide_by_id(
+    async def get_style_guide(
         self, style_guide_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> StyleGuideResponse:
         """
@@ -349,14 +328,14 @@ class AsyncStyleGuidesClient:
 
 
         async def main() -> None:
-            await client.style_guides.get_style_guide_by_id(
+            await client.style_guides.get_style_guide(
                 style_guide_id="style_guide_id",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_style_guide_by_id(style_guide_id, request_options=request_options)
+        _response = await self._raw_client.get_style_guide(style_guide_id, request_options=request_options)
         return _response.data
 
     async def delete_style_guide(
@@ -400,11 +379,7 @@ class AsyncStyleGuidesClient:
         return _response.data
 
     async def update_style_guide(
-        self,
-        style_guide_id: str,
-        *,
-        name: typing.Optional[str] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
+        self, style_guide_id: str, *, name: str, request_options: typing.Optional[RequestOptions] = None
     ) -> StyleGuideResponse:
         """
         Update the name of an existing style guide.
@@ -414,7 +389,7 @@ class AsyncStyleGuidesClient:
         style_guide_id : str
             The ID of the style guide.
 
-        name : typing.Optional[str]
+        name : str
             The name of the style guide.
 
         request_options : typing.Optional[RequestOptions]
@@ -439,6 +414,7 @@ class AsyncStyleGuidesClient:
         async def main() -> None:
             await client.style_guides.update_style_guide(
                 style_guide_id="style_guide_id",
+                name="name",
             )
 
 
