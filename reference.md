@@ -1,6 +1,6 @@
 # Reference
 ## Style Guides
-<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">list_style_guides</a>(...)</code></summary>
+<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">list_style_guides</a>()</code></summary>
 <dl>
 <dd>
 
@@ -44,22 +44,6 @@ client.style_guides.list_style_guides()
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**offset:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**limit:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -154,7 +138,7 @@ core.File` — See core.File for more documentation
 </dl>
 </details>
 
-<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">get_style_guide_by_id</a>(...)</code></summary>
+<details><summary><code>client.style_guides.<a href="src/acrolinx/style_guides/client.py">get_style_guide</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -186,7 +170,7 @@ from acrolinx import Acrolinx
 client = Acrolinx(
     token="YOUR_TOKEN",
 )
-client.style_guides.get_style_guide_by_id(
+client.style_guides.get_style_guide(
     style_guide_id="style_guide_id",
 )
 
@@ -328,6 +312,7 @@ client = Acrolinx(
 )
 client.style_guides.update_style_guide(
     style_guide_id="style_guide_id",
+    name="name",
 )
 
 ```
@@ -352,7 +337,7 @@ client.style_guides.update_style_guide(
 <dl>
 <dd>
 
-**name:** `typing.Optional[str]` — The name of the style guide.
+**name:** `str` — The name of the style guide.
     
 </dd>
 </dl>
@@ -451,7 +436,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `str` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+**style_guide:** `str` — The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
     
 </dd>
 </dl>
@@ -620,7 +605,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `str` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+**style_guide:** `str` — The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
     
 </dd>
 </dl>
@@ -789,7 +774,7 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
-**style_guide:** `str` — The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+**style_guide:** `str` — The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
     
 </dd>
 </dl>

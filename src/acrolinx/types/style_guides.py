@@ -2,6 +2,4 @@
 
 import typing
 
-StyleGuides = typing.Union[
-    typing.Literal["ap", "chicago", "microsoft", "proofpoint", "style_brand_importer"], typing.Any
-]
+StyleGuides = typing.Union[typing.Literal["ap", "chicago", "microsoft", "demo", "style_brand_importer"], typing.Any]

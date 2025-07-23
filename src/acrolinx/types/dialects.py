@@ -2,7 +2,4 @@
 
 import typing
 
-Dialects = typing.Union[
-    typing.Literal["american_english", "australian_english", "british_oxford", "canadian_english", "indian_english"],
-    typing.Any,
-]
+Dialects = typing.Union[typing.Literal["american_english", "british_oxford", "canadian_english"], typing.Any]

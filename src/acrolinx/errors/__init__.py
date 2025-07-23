@@ -2,8 +2,10 @@
 
 # isort: skip_file
 
+from .content_too_large_error import ContentTooLargeError
+from .forbidden_error import ForbiddenError
 from .internal_server_error import InternalServerError
 from .not_found_error import NotFoundError
 from .unprocessable_entity_error import UnprocessableEntityError
 
-__all__ = ["InternalServerError", "NotFoundError", "UnprocessableEntityError"]
+__all__ = ["ContentTooLargeError", "ForbiddenError", "InternalServerError", "NotFoundError", "UnprocessableEntityError"]

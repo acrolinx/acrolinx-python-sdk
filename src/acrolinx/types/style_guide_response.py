@@ -22,7 +22,7 @@ class StyleGuideResponse(UniversalBaseModel):
 
     created_by: str = pydantic.Field()
     """
-    The user who created the style guide.
+    The ID of the user who created the style guide.
     """
 
     status: StyleGuideStatus = pydantic.Field()
@@ -37,7 +37,7 @@ class StyleGuideResponse(UniversalBaseModel):
 
     updated_by: typing.Optional[str] = pydantic.Field(default=None)
     """
-    The user who last updated the style guide. If null, the style guide has never been updated.
+    The ID of the user who last updated the style guide. If null, the style guide has never been updated.
     """
 
     if IS_PYDANTIC_V2:

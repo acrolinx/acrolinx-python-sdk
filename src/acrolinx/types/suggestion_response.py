@@ -11,10 +11,10 @@ from .suggestion import Suggestion
 
 
 class SuggestionResponse(UniversalBaseModel):
-    status: StyleGuideStatus
+    status: typing.Optional[StyleGuideStatus] = None
     scores: typing.Optional[ScoreOutput] = None
-    issues: typing.List[Suggestion]
-    check_options: CheckOptions
+    issues: typing.Optional[typing.List[Suggestion]] = None
+    check_options: typing.Optional[CheckOptions] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -11,10 +11,10 @@ from .style_guide_status import StyleGuideStatus
 
 
 class StyleCheckResponse(UniversalBaseModel):
-    status: StyleGuideStatus
+    status: typing.Optional[StyleGuideStatus] = None
     scores: typing.Optional[ScoreOutput] = None
-    issues: typing.List[Issue]
-    check_options: CheckOptions
+    issues: typing.Optional[typing.List[Issue]] = None
+    check_options: typing.Optional[CheckOptions] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

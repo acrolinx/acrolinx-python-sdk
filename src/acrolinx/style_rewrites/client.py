@@ -6,10 +6,10 @@ from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.dialects import Dialects
+from ..types.style_check_response import StyleCheckResponse
 from ..types.tones import Tones
 from ..types.workflow_response import WorkflowResponse
 from .raw_client import AsyncRawStyleRewritesClient, RawStyleRewritesClient
-from .types.style_rewrites_get_style_rewrite_response import StyleRewritesGetStyleRewriteResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -54,7 +54,7 @@ class StyleRewritesClient:
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : str
-            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+            The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -88,7 +88,7 @@ class StyleRewritesClient:
 
     def get_style_rewrite(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> StyleRewritesGetStyleRewriteResponse:
+    ) -> StyleCheckResponse:
         """
         Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 
@@ -101,7 +101,7 @@ class StyleRewritesClient:
 
         Returns
         -------
-        StyleRewritesGetStyleRewriteResponse
+        StyleCheckResponse
             The rewrite run results.
 
         Examples
@@ -158,7 +158,7 @@ class AsyncStyleRewritesClient:
             The tone variation you're aiming for. Options include formal, academic, casual, and other tone variations to match your content goals.
 
         style_guide : str
-            The style guide to follow for your content. You can use a custom style guide ID or choose from built-in options like AP, Chicago, or Microsoft style guides.
+            The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -200,7 +200,7 @@ class AsyncStyleRewritesClient:
 
     async def get_style_rewrite(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> StyleRewritesGetStyleRewriteResponse:
+    ) -> StyleCheckResponse:
         """
         Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 
@@ -213,7 +213,7 @@ class AsyncStyleRewritesClient:
 
         Returns
         -------
-        StyleRewritesGetStyleRewriteResponse
+        StyleCheckResponse
             The rewrite run results.
 
         Examples
