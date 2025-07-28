@@ -16,7 +16,7 @@ from ..errors.not_found_error import NotFoundError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.dialects import Dialects
 from ..types.error_response import ErrorResponse
-from ..types.style_check_response import StyleCheckResponse
+from ..types.rewrite_response import RewriteResponse
 from ..types.tones import Tones
 from ..types.workflow_response import WorkflowResponse
 
@@ -127,7 +127,7 @@ class RawStyleRewritesClient:
 
     def get_style_rewrite(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[StyleCheckResponse]:
+    ) -> HttpResponse[RewriteResponse]:
         """
         Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 
@@ -140,7 +140,7 @@ class RawStyleRewritesClient:
 
         Returns
         -------
-        HttpResponse[StyleCheckResponse]
+        HttpResponse[RewriteResponse]
             The rewrite run results.
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -151,9 +151,9 @@ class RawStyleRewritesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    StyleCheckResponse,
+                    RewriteResponse,
                     parse_obj_as(
-                        type_=StyleCheckResponse,  # type: ignore
+                        type_=RewriteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -300,7 +300,7 @@ class AsyncRawStyleRewritesClient:
 
     async def get_style_rewrite(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[StyleCheckResponse]:
+    ) -> AsyncHttpResponse[RewriteResponse]:
         """
         Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 
@@ -313,7 +313,7 @@ class AsyncRawStyleRewritesClient:
 
         Returns
         -------
-        AsyncHttpResponse[StyleCheckResponse]
+        AsyncHttpResponse[RewriteResponse]
             The rewrite run results.
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -324,9 +324,9 @@ class AsyncRawStyleRewritesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    StyleCheckResponse,
+                    RewriteResponse,
                     parse_obj_as(
-                        type_=StyleCheckResponse,  # type: ignore
+                        type_=RewriteResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
