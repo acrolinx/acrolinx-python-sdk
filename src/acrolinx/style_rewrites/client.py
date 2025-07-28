@@ -6,7 +6,7 @@ from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.dialects import Dialects
-from ..types.style_check_response import StyleCheckResponse
+from ..types.rewrite_response import RewriteResponse
 from ..types.tones import Tones
 from ..types.workflow_response import WorkflowResponse
 from .raw_client import AsyncRawStyleRewritesClient, RawStyleRewritesClient
@@ -88,7 +88,7 @@ class StyleRewritesClient:
 
     def get_style_rewrite(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> StyleCheckResponse:
+    ) -> RewriteResponse:
         """
         Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 
@@ -101,7 +101,7 @@ class StyleRewritesClient:
 
         Returns
         -------
-        StyleCheckResponse
+        RewriteResponse
             The rewrite run results.
 
         Examples
@@ -200,7 +200,7 @@ class AsyncStyleRewritesClient:
 
     async def get_style_rewrite(
         self, workflow_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> StyleCheckResponse:
+    ) -> RewriteResponse:
         """
         Retrieve the results of a rewrite workflow. Returns `running` or `complete` status.
 
@@ -213,7 +213,7 @@ class AsyncStyleRewritesClient:
 
         Returns
         -------
-        StyleCheckResponse
+        RewriteResponse
             The rewrite run results.
 
         Examples

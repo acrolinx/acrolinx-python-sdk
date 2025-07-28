@@ -11,6 +11,7 @@ from .grammar_score import GrammarScore
 from .issue import Issue
 from .issue_category import IssueCategory
 from .quality_score import QualityScore
+from .rewrite_response import RewriteResponse
 from .score_output import ScoreOutput
 from .sentence_length_category import SentenceLengthCategory
 from .sentence_structure_category import SentenceStructureCategory
@@ -43,6 +44,7 @@ __all__ = [
     "Issue",
     "IssueCategory",
     "QualityScore",
+    "RewriteResponse",
     "ScoreOutput",
     "SentenceLengthCategory",
     "SentenceStructureCategory",
