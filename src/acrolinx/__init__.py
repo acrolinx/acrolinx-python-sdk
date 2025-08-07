@@ -32,6 +32,7 @@ from .types import (
     ToneCategory,
     ToneScore,
     Tones,
+    WebhookResponse,
     WorkflowResponse,
     WorkflowStatus,
 )
@@ -79,6 +80,7 @@ __all__ = [
     "ToneScore",
     "Tones",
     "UnprocessableEntityError",
+    "WebhookResponse",
     "WorkflowResponse",
     "WorkflowStatus",
     "__version__",

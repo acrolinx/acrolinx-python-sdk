@@ -6,15 +6,22 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .check_options import CheckOptions
 from .score_output import ScoreOutput
-from .style_guide_status import StyleGuideStatus
 from .suggestion import Suggestion
+from .webhook_response import WebhookResponse
+from .workflow_status import WorkflowStatus
 
 
 class RewriteResponse(UniversalBaseModel):
-    status: typing.Optional[StyleGuideStatus] = None
+    workflow_id: typing.Optional[str] = None
+    status: typing.Optional[WorkflowStatus] = None
     scores: typing.Optional[ScoreOutput] = None
     issues: typing.Optional[typing.List[Suggestion]] = None
     check_options: typing.Optional[CheckOptions] = None
+    webhook_response: typing.Optional[WebhookResponse] = pydantic.Field(default=None)
+    """
+    The status code received and URL used when sending the webhook if a webhook URL was included when starting the process.
+    """
+
     rewrite: typing.Optional[str] = None
     rewrite_scores: typing.Optional[ScoreOutput] = None
 

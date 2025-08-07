@@ -31,6 +31,7 @@ from .terminology_score import TerminologyScore
 from .tone_category import ToneCategory
 from .tone_score import ToneScore
 from .tones import Tones
+from .webhook_response import WebhookResponse
 from .workflow_response import WorkflowResponse
 from .workflow_status import WorkflowStatus
 
@@ -64,6 +65,7 @@ __all__ = [
     "ToneCategory",
     "ToneScore",
     "Tones",
+    "WebhookResponse",
     "WorkflowResponse",
     "WorkflowStatus",
 ]
