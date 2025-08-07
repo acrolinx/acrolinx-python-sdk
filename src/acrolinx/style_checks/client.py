@@ -37,6 +37,7 @@ class StyleChecksClient:
         dialect: Dialects,
         tone: Tones,
         style_guide: str,
+        webhook_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowResponse:
         """
@@ -55,6 +56,9 @@ class StyleChecksClient:
 
         style_guide : str
             The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
+
+        webhook_url : typing.Optional[str]
+            A URL that results will be POSTed to once the process completes.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -82,6 +86,7 @@ class StyleChecksClient:
             dialect=dialect,
             tone=tone,
             style_guide=style_guide,
+            webhook_url=webhook_url,
             request_options=request_options,
         )
         return _response.data
@@ -141,6 +146,7 @@ class AsyncStyleChecksClient:
         dialect: Dialects,
         tone: Tones,
         style_guide: str,
+        webhook_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkflowResponse:
         """
@@ -159,6 +165,9 @@ class AsyncStyleChecksClient:
 
         style_guide : str
             The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
+
+        webhook_url : typing.Optional[str]
+            A URL that results will be POSTed to once the process completes.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -194,6 +203,7 @@ class AsyncStyleChecksClient:
             dialect=dialect,
             tone=tone,
             style_guide=style_guide,
+            webhook_url=webhook_url,
             request_options=request_options,
         )
         return _response.data

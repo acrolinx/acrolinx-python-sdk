@@ -444,6 +444,14 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
+**webhook_url:** `typing.Optional[str]` — A URL that results will be POSTed to once the process completes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -613,6 +621,14 @@ core.File` — See core.File for more documentation
 <dl>
 <dd>
 
+**webhook_url:** `typing.Optional[str]` — A URL that results will be POSTed to once the process completes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -775,6 +791,14 @@ core.File` — See core.File for more documentation
 <dd>
 
 **style_guide:** `str` — The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**webhook_url:** `typing.Optional[str]` — A URL that results will be POSTed to once the process completes.
     
 </dd>
 </dl>

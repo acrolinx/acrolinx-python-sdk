@@ -35,6 +35,7 @@ class RawStyleRewritesClient:
         dialect: Dialects,
         tone: Tones,
         style_guide: str,
+        webhook_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[WorkflowResponse]:
         """
@@ -54,6 +55,9 @@ class RawStyleRewritesClient:
         style_guide : str
             The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
+        webhook_url : typing.Optional[str]
+            A URL that results will be POSTed to once the process completes.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -69,6 +73,7 @@ class RawStyleRewritesClient:
                 "dialect": dialect,
                 "tone": tone,
                 "style_guide": style_guide,
+                "webhook_url": webhook_url,
             },
             files={
                 "file_upload": file_upload,
@@ -208,6 +213,7 @@ class AsyncRawStyleRewritesClient:
         dialect: Dialects,
         tone: Tones,
         style_guide: str,
+        webhook_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[WorkflowResponse]:
         """
@@ -227,6 +233,9 @@ class AsyncRawStyleRewritesClient:
         style_guide : str
             The style guide to follow for your content. You can use a style guide ID or choose from built-in options: `ap`, `chicago`, or `microsoft`.
 
+        webhook_url : typing.Optional[str]
+            A URL that results will be POSTed to once the process completes.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -242,6 +251,7 @@ class AsyncRawStyleRewritesClient:
                 "dialect": dialect,
                 "tone": tone,
                 "style_guide": style_guide,
+                "webhook_url": webhook_url,
             },
             files={
                 "file_upload": file_upload,
